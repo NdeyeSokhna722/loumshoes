@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoumShoes - Chaussures de Basket & Maillots de Football</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles personnalisés */
+        .category-tab.active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .filter-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .marque-filter.active {
+            background-color: #10b981;
+            color: white;
+        }
+        .sport-filter.active {
+            background-color: #8b5cf6;
+            color: white;
+        }
+        .promo-badge {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .quantity-selector {
+            width: 120px;
+        }
+        .made-in-china-badge {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        .fcfaprice {
+            font-weight: bold;
+            color: #065f46;
+        }
+        .localprice {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- En-tête / Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+               <div class="flex items-center space-x-2">
+    <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-12 w-auto">
+    <h1 class="text-2xl font-bold text-gray-800">LOUM BUSINESS<span class="text-blue-600">CORPORATIONS</span></h1>
+</div>
+                <!-- Navigation desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#accueil" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-blue-600 font-medium">Catalogue</a>
+                    <a href="#chaussures" class="text-gray-700 hover:text-blue-600 font-medium">Chaussures</a>
+                    <a href="#maillots" class="text-gray-700 hover:text-blue-600 font-medium">Maillots</a>
+                    <a href="#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
+                    <a href="#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-red-600 font-medium">Contact</a>
+                </nav>
+                
+                <!-- Icônes panier et menu mobile -->
+                <div class="flex items-center space-x-6">
+                    <!-- Panier avec compteur -->
+                    <div class="relative">
+                        <button id="cartToggle" class="text-gray-700 hover:text-blue-600">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Menu mobile -->
+                    <button id="mobileMenuToggle" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Menu mobile -->
+            <div id="mobileMenu" class="hidden md:hidden py-4 border-t">
+                <div class="flex flex-col space-y-4">
+                    <a href="#accueil" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="#chaussures" class="text-gray-700 hover:text-blue-600 font-medium">Chaussures</a>
+                    <a href="#maillots" class="text-gray-700 hover:text-blue-600 font-medium">Maillots</a>
+                    <a href="#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
+                    <a href="#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière principale -->
+    <section id="accueil" class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Performance & Style</h2>
+                    <p class="text-lg md:text-xl mb-6">Découvrez notre collection exclusive de chaussures de basket et maillots de football des plus grandes marques. <span class="font-bold">Prix en FCFA</span> pour nos clients d'Afrique de l'Ouest.</p>
+                    <div class="flex space-x-4">
+                        <a href="#chaussures" class="bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition">Voir les chaussures</a>
+                        <a href="#maillots" class="bg-transparent border-2 border-white text-white font-bold py-3 px-6 rounded-lg hover:bg-white hover:text-blue-600 transition">Voir les maillots</a>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-2">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Nike</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Adidas</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Puma</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Jordan</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Under Armour</span>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <!-- Boutique avec éclairage design -->
+                        <img src="images/photo.avif" 
+                             alt="Boutique design SportPro" 
+                             class="rounded-lg shadow-2xl w-full max-w-lg h-80 object-cover">
+                        
+                        <!-- Détail produits -->
+                        <img src="tronik.webp" 
+                             alt="Chaussures en vitrine" 
+                             class="rounded-lg shadow-2xl w-4/5 absolute -bottom-6 -right-6 border-4 border-white">
+                        
+                        <!-- Badge qualité -->
+                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-award text-yellow-500"></i>
+                                <span class="font-bold text-gray-800">Prix en FCFA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catégories -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Nos Catégories</h2>
+            <div class="flex justify-center space-x-2 md:space-x-8 border-b mb-10 overflow-x-auto">
+                <button class="category-tab active py-3 px-4 text-lg font-medium" data-category="all">Tous les produits</button>
+                <button class="category-tab py-3 px-4 text-lg font-medium" data-category="chaussures">Chaussures de basket</button>
+                <button class="category-tab py-3 px-4 text-lg font-medium" data-category="maillots">Maillots de football</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtres avancés -->
+    <section class="py-6 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="mb-4">
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Filtrer par:</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50 active" data-filter="all">Tous</button>
+                    <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50" data-filter="homme">Homme</button>
+                    <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50" data-filter="femme">Femme</button>
+                    <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50" data-filter="enfant">Enfant</button>
+                    <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50" data-filter="promo">Promotions</button>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Marques:</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="all">Toutes</button>
+                    <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="nike">Nike</button>
+                    <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="adidas">Adidas</button>
+                    <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="puma">Puma</button>
+                    <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="jordan">Jordan</button>
+                    <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="under armour">Under Armour</button>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Sport:</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button class="sport-filter px-4 py-2 bg-white rounded-lg border hover:bg-purple-50 active" data-sport="all">Tous</button>
+                    <button class="sport-filter px-4 py-2 bg-white rounded-lg border hover:bg-purple-50" data-sport="basket">Basket</button>
+                    <button class="sport-filter px-4 py-2 bg-white rounded-lg border hover:bg-purple-50" data-sport="football">Football</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Produits -->
+    <section id="productsSection" class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-2xl font-bold text-gray-800">Nos produits</h3>
+                <div class="text-gray-600">
+                    <span id="productCount">100</span> produits disponibles
+                </div>
+            </div>
+            
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Les produits seront ajoutés dynamiquement ici -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Marques -->
+    <section id="marques" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Nos Marques Partenaires</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-basketball text-4xl text-orange-500 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Nike</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-futbol text-4xl text-black mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Adidas</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-running text-4xl text-red-500 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Puma</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-basketball-ball text-4xl text-red-600 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Jordan</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-tshirt text-4xl text-gray-800 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Under Armour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Promotions -->
+    <section id="promotions" class="py-12 bg-gradient-to-r from-red-50 to-orange-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Promotions en cours</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+                    <div class="text-5xl text-red-500 mb-4">🔥</div>
+                    <h3 class="text-xl font-bold mb-2">Vente Flash</h3>
+                    <p class="text-gray-600 mb-4">Jusqu'à -50% sur une sélection de maillots</p>
+                    <a href="#maillots" class="text-red-600 font-semibold hover:text-red-800">Voir les offres →</a>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+                    <div class="text-5xl text-blue-500 mb-4">🚚</div>
+                    <h3 class="text-xl font-bold mb-2">Livraison gratuite</h3>
+                    <p class="text-gray-600 mb-4">À partir de 32.800 FCFA d'achat</p>
+                    <a href="#chaussures" class="text-blue-600 font-semibold hover:text-blue-800">Profitez-en →</a>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+                    <div class="text-5xl text-green-500 mb-4">🎁</div>
+                    <h3 class="text-xl font-bold mb-2">Pack équipe</h3>
+                    <p class="text-gray-600 mb-4">Achetez 3 maillots, le 4ème est offert</p>
+                    <a href="#maillots" class="text-green-600 font-semibold hover:text-green-800">Découvrir →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panier latéral -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-2xl font-bold">Mon Panier</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-800">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="mb-8">
+                <!-- Les articles du panier seront ajoutés ici -->
+                <p id="emptyCartMessage" class="text-gray-500 text-center py-8">Votre panier est vide</p>
+            </div>
+            
+            <div class="border-t pt-4">
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Sous-total:</span>
+                    <span id="cartSubtotal" class="font-bold">0 FCFA</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="font-medium">Livraison:</span>
+                    <span id="cartShipping" class="font-bold">Gratuite</span>
+                </div>
+                <div class="flex justify-between text-xl font-bold mb-8">
+                    <span>Total:</span>
+                    <span id="cartTotal">0 FCFA</span>
+                </div>
+                
+                <button id="checkoutBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-lg hover:bg-blue-700 transition mb-4">Passer la commande</button>
+                <button id="continueShopping" class="w-full bg-gray-200 text-gray-800 font-bold py-4 rounded-lg hover:bg-gray-300 transition">Continuer mes achats</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay pour le panier -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <h2 class="text-2xl font-bold">Loum<span class="text-blue-400">Shoes</span></h2>
+                    </div>
+                    <p class="text-gray-300 mb-4">Votre destination pour l'équipement sportif de qualité. Chaussures de basket et maillots de football pour tous les niveaux. <span class="font-semibold">Prix en FCFA.</span></p>
+                    <div class="flex space-x-4">
+                        <a href="#Loum shoes" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#@loum450" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Catégories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#chaussures" class="text-gray-300 hover:text-white">Chaussures de basket</a></li>
+                        <li><a href="#maillots" class="text-gray-300 hover:text-white">Maillots de football</a></li>
+                        <li><a href="#marques" class="text-gray-300 hover:text-white">Marques</a></li>
+                        <li><a href="#promotions" class="text-gray-300 hover:text-white">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Service client</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Livraison & Retours</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Guide des tailles</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Contactez-nous</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt text-blue-400"></i>
+                            <span class="text-gray-300">Dakar, Sénégal</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-blue-400"></i>
+                            <span class="text-gray-300">+221 76 550 76 37 </span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                            <span class="text-gray-300">thiernoloumsa@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2023 LoumSport. Tous droits réservés. <span class="font-semibold">Prix affichés en FCFA (Franc CFA).</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Taux de conversion: 1€ = 655 FCFA (approximatif)
+        const CONVERSION_RATE = 655;
+        
+        // Fonction pour convertir les prix en FCFA
+        function convertToFCFA(priceInEuro) {
+            return Math.round(priceInEuro * CONVERSION_RATE);
+        }
+        
+        // Fonction pour formatter les nombres avec séparateurs de milliers
+        function formatFCFA(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " FCFA";
+        }
+
+        // Données des produits (36 produits: 12 chaussures, 24 maillots)
+        const products = [
+            // Chaussures de basket (12 produits)
+            {
+                id: 1,
+                name: "Nike Air Jordan XXXVII",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(10.99),
+                originalPrice: convertToFCFA(11.99),
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Performance ultime avec amorti Zoom Air.",
+                promo: true,
+                colors: ["Noir", "Rouge", "Blanc"],
+                popular: true,
+                stock: 15
+            },
+            {
+                id: 2,
+                name: "Adidas Harden Vol. 7",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "adidas",
+                price: convertToFCFA(13.99),
+                originalPrice: convertToFCFA(14.99),
+                image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Conçues pour James Harden, agilité maximale.",
+                promo: false,
+                colors: ["Noir", "Blanc", "Bleu"],
+                stock: 8
+            },
+            {
+                id: 3,
+                name: "Puma Clyde All-Pro",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "puma",
+                price: convertToFCFA(9.99),
+                originalPrice: convertToFCFA(10.99),
+                image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Léger et réactif pour le jeu rapide.",
+                promo: true,
+                colors: ["Noir", "Blanc", "Rouge"],
+                stock: 12
+            },
+            {
+                id: 4,
+                name: "Nike LeBron 20",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(15.99),
+                originalPrice: convertToFCFA(16.99),
+                image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Puissance et contrôle pour le jeu intérieur.",
+                promo: false,
+                colors: ["Noir", "Or", "Pourpre"],
+                popular: true,
+                stock: 5
+            },
+            {
+                id: 5,
+                name: "Under Armour Curry 10",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "under armour",
+                price: convertToFCFA(159.99),
+                originalPrice: convertToFCFA(179.99),
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Stabilité exceptionnelle pour les shooteurs.",
+                promo: true,
+                colors: ["Jaune", "Noir", "Bleu"],
+                stock: 10
+            },
+            {
+                id: 6,
+                name: "Nike KD 15",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(7.99),
+                originalPrice: convertToFCFA(8.99),
+                image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Polyvalentes pour tous les terrains.",
+                promo: false,
+                colors: ["Orange", "Noir", "Blanc"],
+                stock: 18
+            },
+            {
+                id: 7,
+                name: "Adidas Dame 8",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "adidas",
+                price: convertToFCFA(12.99),
+                originalPrice: convertToFCFA(13.99),
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Confort et réactivité pour Damian Lillard.",
+                promo: true,
+                colors: ["Rouge", "Noir", "Blanc"],
+                stock: 7
+            },
+            {
+                id: 8,
+                name: "Nike Kyrie Infinity",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(14.99),
+                originalPrice: convertToFCFA(15.99),
+                image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Manœuvrabilité exceptionnelle.",
+                promo: false,
+                colors: ["Vert", "Noir", "Blanc"],
+                stock: 14
+            },
+            {
+                id: 9,
+                name: "Jordan Zion 2",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "jordan",
+                price: convertToFCFA(8.99),
+                originalPrice: convertToFCFA(9.99),
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Puissance et explosivité pour Zion Williamson.",
+                promo: true,
+                colors: ["Bleu", "Noir", "Blanc"],
+                stock: 9
+            },
+            {
+                id: 10,
+                name: "Puma MB.01",
+                category: "chaussures",
+                sport: "basket",
+                type: "homme",
+                marque: "puma",
+                price: convertToFCFA(17.99),
+                originalPrice: convertToFCFA(18.99),
+                image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Édition LaMelo Ball, style unique.",
+                promo: false,
+                colors: ["Rose", "Noir", "Jaune"],
+                stock: 11
+            },
+            {
+                id: 11,
+                name: "Nike Giannis Immortality 2",
+                category: "chaussures",
+                sport: "basket",
+                type: "femme",
+                marque: "nike",
+                price: convertToFCFA(8.99),
+                originalPrice: convertToFCFA(9.99),
+                image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Accessibles et performantes.",
+                promo: true,
+                colors: ["Rose", "Blanc", "Noir"],
+                stock: 20
+            },
+            {
+                id: 12,
+                name: "Adidas Exhibit B",
+                category: "chaussures",
+                sport: "basket",
+                type: "enfant",
+                marque: "adidas",
+                price: convertToFCFA(6.99),
+                originalPrice: convertToFCFA(7.99),
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Parfaites pour les jeunes joueurs.",
+                promo: true,
+                colors: ["Bleu", "Rouge", "Noir"],
+                stock: 25
+            },
+            
+            // Maillots de football (24 produits)
+            {
+                id: 13,
+                name: "2025-26 Relié Maillot Player Version Jersey",
+                category: "maillots",
+                sport: "football",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(12.36),
+                originalPrice: convertToFCFA(13.20),
+                image: "images/nike.webp",
+                description: "Maillot version joueur 2025-26, qualité premium.",
+                promo: true,
+                colors: ["Bleu", "Blanc"],
+                stock: 50,
+                madeInChina: true,
+                usPrice: "$5"
+            },
+            {
+                id: 14,
+                name: "Brazil Jersey 2024-2025-2026 Soccer",
+                category: "maillots",
+                sport: "football",
+                type: "homme",
+                marque: "adidas",
+                price: convertToFCFA(10.36),
+                originalPrice: convertToFCFA(11.20),
+                image: "images/aireway.webp",
+                description: "Maillot Brésil officiel pour les 3 prochaines saisons.",
+                promo: true,
+                colors: ["Jaune", "Vert", "Bleu"],
+                stock: 45,
+                madeInChina: true,
+                usPrice: "$5"
+            },
+            {
+                id: 15,
+                name: "European Cup Football Shirt 2024-2025",
+                category: "maillots",
+                sport: "football",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(14.80),
+                originalPrice: convertToFCFA(15.00),
+                image: "images/maillot.avif",
+                description: "Maillot Édition Spéciale Coupe d'Europe.",
+                promo: true,
+                colors: ["Blanc", "Or"],
+                stock: 30,
+                madeInChina: true,
+                usPrice: "$8"
+            },
+            {
+                id: 16,
+                name: "Maillot De Foot Set Thai Brazil Soccer",
+                category: "maillots",
+                sport: "football",
+                type: "homme",
+                marque: "puma",
+                price: convertToFCFA(20.09),
+                originalPrice: convertToFCFA(21.86),
+                image: "images/qatar.webp",
+                description: "Pack spécial Brésil avec short et chaussettes.",
+                promo: false,
+                colors: ["Jaune", "Vert"],
+                stock: 15,
+                madeInChina: true,
+               
+            },
+           {
+    id: 17,
+    name: "2006 Season France Away Retro Player Version",
+    category: "maillots",
+    sport: "football",
+    type: "homme",
+    marque: "adidas",
+    price: convertToFCFA(14.80),
+    originalPrice: convertToFCFA(15.00),
+    image: "images/emirat.webp",
+    description: "Édition rétro France 2006, version joueur.",
+    promo: true,
+    colors: ["Blanc", "Bleu"],
+    stock: 25,
+    madeInChina: true,
+    usPrice: "$8"
+},
+            {
+                id: 18,
+                name: "Dropshipping Soccer Jersey High Quality",
+                category: "maillots",
+                sport: "football",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(16.31),
+                originalPrice: convertToFCFA(17.89),
+                image: "images/vert.webp",
+                description: "Haute qualité, parfait pour le dropshipping.",
+                promo: true,
+                colors: ["Rouge", "Noir"],
+                stock: 100,
+                madeInChina: true,
+                usPrice: "$10"
+            },
+          
+            
+          
+            {
+                id: 19,
+                name: "England 2024 Away Jersey",
+                category: "maillots",
+                sport: "football",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(54.95),
+                originalPrice: convertToFCFA(68.69),
+                image: "images/naija.webp",
+                description: "Maillot extérieur Angleterre 2024.",
+                promo: true,
+                colors: ["Bleu", "Rouge"],
+                stock: 21,
+                madeInChina: true,
+                usPrice: "$10"
+            },
+            {
+                id: 20,
+                name: "Netherlands 2024 Home Jersey",
+                category: "maillots",
+                sport: "football",
+                type: "homme",
+                marque: "nike",
+                price: convertToFCFA(52.50),
+                originalPrice: convertToFCFA(65.63),
+                image: "images/cma.webp",
+                description: "Maillot domicile Pays-Bas 2024.",
+                promo: true,
+                colors: ["Orange", "Blanc"],
+                stock: 24,
+                madeInChina: true,
+                usPrice: "$9"
+            }
+        ];
+
+        // État de l'application
+        let cart = [];
+        let currentCategory = 'all';
+        let currentFilter = 'all';
+        let currentMarque = 'all';
+        let currentSport = 'all';
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            setupEventListeners();
+            updateCartCount();
+            
+            // Ajouter des écouteurs pour les liens de navigation
+            setupNavigationLinks();
+        });
+
+        // Configuration des événements de navigation
+        function setupNavigationLinks() {
+            // Lien "Maillots" dans le menu
+            document.querySelectorAll('a[href="#maillots"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Activer la catégorie maillots
+                    activateCategory('maillots');
+                    
+                    // Faire défiler jusqu'à la section des produits
+                    document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Lien "Chaussures" dans le menu
+            document.querySelectorAll('a[href="#chaussures"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Activer la catégorie chaussures
+                    activateCategory('chaussures');
+                    
+                    // Faire défiler jusqu'à la section des produits
+                    document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Lien "Accueil" dans le menu
+            document.querySelectorAll('a[href="#accueil"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Activer la catégorie tous
+                    activateCategory('all');
+                    
+                    // Faire défiler jusqu'au début
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        }
+
+        // Fonction pour activer une catégorie spécifique
+        function activateCategory(category) {
+            // Mettre à jour l'onglet actif
+            document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.category-tab[data-category="${category}"]`).classList.add('active');
+            
+            // Mettre à jour la catégorie actuelle
+            currentCategory = category;
+            
+            // Réinitialiser les autres filtres
+            currentFilter = 'all';
+            currentMarque = 'all';
+            currentSport = 'all';
+            
+            // Réinitialiser les boutons de filtre
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+            
+            document.querySelectorAll('.marque-filter').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.marque-filter[data-marque="all"]').classList.add('active');
+            
+            document.querySelectorAll('.sport-filter').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.sport-filter[data-sport="all"]').classList.add('active');
+            
+            // Rendre les produits
+            renderProducts();
+        }
+
+        // Configuration des événements
+        function setupEventListeners() {
+            // Tabs de catégories
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Mettre à jour l'onglet actif
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour la catégorie actuelle
+                    currentCategory = this.getAttribute('data-category');
+                    renderProducts();
+                });
+            });
+
+            // Boutons de filtre
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Mettre à jour le filtre actif
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour le filtre actuel
+                    currentFilter = this.getAttribute('data-filter');
+                    renderProducts();
+                });
+            });
+
+            // Filtres marque
+            document.querySelectorAll('.marque-filter').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Mettre à jour le filtre actif
+                    document.querySelectorAll('.marque-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour la marque actuelle
+                    currentMarque = this.getAttribute('data-marque');
+                    renderProducts();
+                });
+            });
+
+            // Filtres sport
+            document.querySelectorAll('.sport-filter').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Mettre à jour le filtre actif
+                    document.querySelectorAll('.sport-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour le sport actuel
+                    currentSport = this.getAttribute('data-sport');
+                    renderProducts();
+                });
+            });
+
+            // Panier
+            document.getElementById('cartToggle').addEventListener('click', openCart);
+            document.getElementById('closeCart').addEventListener('click', closeCart);
+            document.getElementById('continueShopping').addEventListener('click', closeCart);
+            document.getElementById('cartOverlay').addEventListener('click', closeCart);
+            document.getElementById('checkoutBtn').addEventListener('click', checkout);
+
+            // Menu mobile
+            document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+        }
+
+        // Rendu des produits
+        function renderProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            // Filtrer les produits selon tous les critères
+            const filteredProducts = products.filter(product => {
+                // Filtre par catégorie
+                const categoryMatch = currentCategory === 'all' || product.category === currentCategory;
+                
+                // Filtre par type/promo
+                let filterMatch = false;
+                if (currentFilter === 'all') filterMatch = true;
+                else if (currentFilter === 'promo') filterMatch = product.promo;
+                else filterMatch = product.type === currentFilter;
+                
+                // Filtre par marque
+                const marqueMatch = currentMarque === 'all' || product.marque === currentMarque;
+                
+                // Filtre par sport
+                const sportMatch = currentSport === 'all' || product.sport === currentSport;
+                
+                return categoryMatch && filterMatch && marqueMatch && sportMatch;
+            });
+            
+            // Mettre à jour le compteur de produits
+            document.getElementById('productCount').textContent = filteredProducts.length;
+            
+            // Afficher les produits filtrés
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card bg-white rounded-lg shadow-lg overflow-hidden';
+                
+                // Badge de promotion
+                const promoBadge = product.promo ? 
+                    `<div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold promo-badge">-${Math.round((1 - product.price/product.originalPrice)*100)}%</div>` : '';
+                
+                // Badge populaire
+                const popularBadge = product.popular ? 
+                    `<div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">Populaire</div>` : '';
+                
+                // Badge stock
+                const stockBadge = product.stock < 10 ? 
+                    `<div class="absolute bottom-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">Stock limité</div>` : 
+                    `<div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">En stock</div>`;
+                
+                // Prix original barré si en promotion
+                const originalPriceDisplay = product.promo ? 
+                    `<span class="text-gray-500 line-through text-sm">${formatFCFA(product.originalPrice)}</span>` : '';
+                
+                // Icône selon la catégorie
+                const categoryIcon = product.category === 'chaussures' ? 
+                    '<i class="fas fa-basketball-ball text-blue-500 mr-1"></i>' : 
+                    '<i class="fas fa-futbol text-green-500 mr-1"></i>';
+                
+                // Badge "Made in China" pour les maillots
+                const madeInChinaBadge = product.madeInChina ? 
+                    `<div class="made-in-china-badge">${product.usPrice ? product.usPrice + ' (US $)' : ''} made-in-china.com</div>` : '';
+                
+                // Sélecteur de quantité
+                const quantitySelector = `
+                    <div class="flex items-center mt-4 mb-2">
+                        <span class="text-gray-500 text-sm mr-2">Quantité:</span>
+                        <div class="quantity-selector flex items-center border rounded-lg">
+                            <button class="decrease-quantity px-3 py-1 text-gray-500 hover:text-blue-600" data-id="${product.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="quantity-value px-3 py-1 border-x" data-id="${product.id}">1</span>
+                            <button class="increase-quantity px-3 py-1 text-gray-500 hover:text-blue-600" data-id="${product.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productCard.innerHTML = `
+                    <div class="relative">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                        ${promoBadge}
+                        ${popularBadge}
+                        ${stockBadge}
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-800">${product.name}</h3>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded flex items-center">
+                                ${categoryIcon} ${product.category === 'chaussures' ? 'Basket' : 'Football'}
+                            </span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="text-gray-500 text-sm mr-2">${product.marque.charAt(0).toUpperCase() + product.marque.slice(1)}</span>
+                            <span class="text-gray-500 text-sm">• ${product.type.charAt(0).toUpperCase() + product.type.slice(1)}</span>
+                            <span class="text-gray-500 text-sm ml-2">• Stock: ${product.stock}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">${product.description}</p>
+                        <div class="flex items-center mb-4">
+                            <span class="text-gray-500 text-sm mr-2">Couleurs:</span>
+                            <div class="flex space-x-1">
+                                ${product.colors.map(color => `<span class="h-4 w-4 rounded-full border" style="background-color: ${getColorCode(color)}" title="${color}"></span>`).join('')}
+                            </div>
+                        </div>
+                        ${quantitySelector}
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-2xl font-bold text-blue-600 fcfaprice">${formatFCFA(product.price)}</p>
+                                ${originalPriceDisplay}
+                                ${madeInChinaBadge}
+                            </div>
+                            <button class="add-to-cart-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition" data-id="${product.id}">
+                                <i class="fas fa-cart-plus mr-2"></i>Ajouter
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+            
+            // Ajouter des écouteurs d'événements aux boutons "Ajouter au panier"
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const quantityElement = document.querySelector(`.quantity-value[data-id="${productId}"]`);
+                    const quantity = parseInt(quantityElement.textContent);
+                    addToCart(productId, quantity);
+                });
+            });
+            
+            // Ajouter des écouteurs pour les boutons de quantité
+            document.querySelectorAll('.increase-quantity').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const quantityElement = document.querySelector(`.quantity-value[data-id="${productId}"]`);
+                    let quantity = parseInt(quantityElement.textContent);
+                    const product = products.find(p => p.id === productId);
+                    
+                    // Ne pas dépasser le stock disponible
+                    if (quantity < product.stock) {
+                        quantity++;
+                        quantityElement.textContent = quantity;
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.decrease-quantity').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const quantityElement = document.querySelector(`.quantity-value[data-id="${productId}"]`);
+                    let quantity = parseInt(quantityElement.textContent);
+                    
+                    if (quantity > 1) {
+                        quantity--;
+                        quantityElement.textContent = quantity;
+                    }
+                });
+            });
+        }
+
+        // Fonction pour obtenir un code couleur approximatif
+        function getColorCode(colorName) {
+            const colorMap = {
+                'Noir': '#000000',
+                'Blanc': '#FFFFFF',
+                'Rouge': '#FF0000',
+                'Bleu': '#0000FF',
+                'Vert': '#008000',
+                'Rose': '#FFC0CB',
+                'Jaune': '#FFFF00',
+                'Orange': '#FFA500',
+                'Pourpre': '#800080',
+                'Or': '#FFD700',
+                'Gris': '#808080',
+                'Violet': '#800080',
+                'Multicolor': 'linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)'
+            };
+            return colorMap[colorName] || '#CCCCCC';
+        }
+
+        // Gestion du panier
+        function addToCart(productId, quantity = 1) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Vérifier le stock disponible
+            if (quantity > product.stock) {
+                showNotification(`Stock insuffisant! Il ne reste que ${product.stock} unité(s) de ${product.name}.`, 'error');
+                return;
+            }
+            
+            // Vérifier si le produit est déjà dans le panier
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                // Vérifier si la quantité totale dépasse le stock
+                if (existingItem.quantity + quantity > product.stock) {
+                    showNotification(`Vous ne pouvez pas ajouter ${quantity} unité(s) supplémentaires. Stock maximum: ${product.stock}.`, 'error');
+                    return;
+                }
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity
+                });
+            }
+            
+            // Mettre à jour l'affichage
+            updateCartCount();
+            updateCartDisplay();
+            
+            // Afficher une notification
+            showNotification(`${quantity} ${product.name} a été ajouté au panier!`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p id="emptyCartMessage" class="text-gray-500 text-center py-8">Votre panier est vide</p>';
+                document.getElementById('cartSubtotal').textContent = '0 FCFA';
+                document.getElementById('cartTotal').textContent = '0 FCFA';
+                return;
+            }
+            
+            // Supprimer le message "panier vide"
+            emptyCartMessage?.remove();
+            
+            // Afficher les articles du panier
+            let cartHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.id);
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                cartHTML += `
+                    <div class="cart-item flex items-center border-b py-4">
+                        <div class="w-16 h-16 mr-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">${item.name}</h4>
+                            <div class="text-sm text-gray-500">${formatFCFA(item.price)} / unité</div>
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="flex items-center">
+                                    <button class="decrease-qty text-gray-500 hover:text-blue-600 mr-2" data-id="${item.id}">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span class="quantity-display font-medium">${item.quantity}</span>
+                                    <button class="increase-qty text-gray-500 hover:text-blue-600 ml-2" data-id="${item.id}">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="font-bold mr-4">${formatFCFA(itemTotal)}</span>
+                                    <button class="remove-item text-red-500 hover:text-red-700" data-id="${item.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            ${product && item.quantity > product.stock ? 
+                                '<div class="text-red-500 text-sm mt-1">Stock limité! Maximum: ' + product.stock + '</div>' : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = cartHTML;
+            
+            // Mettre à jour les totaux
+            document.getElementById('cartSubtotal').textContent = formatFCFA(subtotal);
+            
+            // Calculer les frais de livraison (gratuits à partir de 32800 FCFA)
+            const shipping = subtotal >= 32800 ? 0 : 3000;
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Gratuite' : formatFCFA(shipping);
+            
+            const total = subtotal + shipping;
+            document.getElementById('cartTotal').textContent = formatFCFA(total);
+            
+            // Ajouter des écouteurs d'événements pour les boutons du panier
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    removeFromCart(productId);
+                });
+            });
+            
+            document.querySelectorAll('.increase-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === productId);
+                    const product = products.find(p => p.id === productId);
+                    
+                    if (item && product) {
+                        // Vérifier le stock
+                        if (item.quantity < product.stock) {
+                            item.quantity += 1;
+                            updateCartCount();
+                            updateCartDisplay();
+                        } else {
+                            showNotification(`Stock maximum atteint pour ${product.name}!`, 'error');
+                        }
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.decrease-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === productId);
+                    if (item) {
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                        } else {
+                            removeFromCart(productId);
+                        }
+                        updateCartCount();
+                        updateCartDisplay();
+                    }
+                });
+            });
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.remove('translate-x-full');
+            document.getElementById('cartOverlay').classList.remove('hidden');
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.add('translate-x-full');
+            document.getElementById('cartOverlay').classList.add('hidden');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Votre panier est vide. Ajoutez des produits avant de passer commande.', 'error');
+                return;
+            }
+            
+            // Vérifier le stock avant de finaliser la commande
+            let stockError = false;
+            let errorMessage = '';
+            
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.id);
+                if (product && item.quantity > product.stock) {
+                    stockError = true;
+                    errorMessage += `- ${product.name}: Stock disponible: ${product.stock}, Quantité demandée: ${item.quantity}\n`;
+                }
+            });
+            
+            if (stockError) {
+                showNotification('Certains produits ne sont plus disponibles en quantité suffisante:\n' + errorMessage, 'error');
+                return;
+            }
+            
+            // Simuler le processus de commande
+            const total = document.getElementById('cartTotal').textContent;
+            showNotification(`Commande passée avec succès! Total: ${total}. Un email de confirmation vous sera envoyé.`);
+            
+            // Vider le panier
+            cart = [];
+            updateCartCount();
+            updateCartDisplay();
+            closeCart();
+        }
+
+        function showNotification(message, type = 'success') {
+            // Créer une notification temporaire
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse max-w-md`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Supprimer la notification après 5 secondes
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

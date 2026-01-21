@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue - SportPro | Chaussures & Maillots</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles personnalisés */
+        .category-tab.active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .filter-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .marque-filter.active {
+            background-color: #10b981;
+            color: white;
+        }
+        .category-filter.active {
+            background-color: #8b5cf6;
+            color: white;
+        }
+        .promo-badge {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .quantity-selector {
+            width: 120px;
+        }
+        .made-in-china-badge {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        .sticky-filters {
+            position: sticky;
+            top: 80px;
+            z-index: 10;
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- En-tête / Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+               <!-- Logo -->
+               <div class="flex items-center space-x-2">
+    <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-12 w-auto">
+    <h1 class="text-2xl font-bold text-gray-800">LOUM BUSINESS<span class="text-blue-600">CORPORATIONS</span></h1>
+</div>
+                
+                <!-- Navigation desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-blue-600 font-medium border-b-2 border-blue-600">Catalogue</a>
+                    <a href="index.html#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
+                    <a href="index.html#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+                </nav>
+                
+                <!-- Icônes panier et menu mobile -->
+                <div class="flex items-center space-x-6">
+                    <!-- Panier avec compteur -->
+                    <div class="relative">
+                        <button id="cartToggle" class="text-gray-700 hover:text-blue-600">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Menu mobile -->
+                    <button id="mobileMenuToggle" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Menu mobile -->
+            <div id="mobileMenu" class="hidden md:hidden py-4 border-t">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-blue-600 font-medium">Catalogue</a>
+                    <a href="index.html#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
+                    <a href="index.html#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière Catalogue -->
+    <section class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Notre Catalogue</h1>
+                    <p class="text-lg md:text-xl">Découvrez notre vaste collection de chaussures et maillots de sport</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <div class="text-center bg-white/20 p-4 rounded-lg">
+                        <p class="text-2xl font-bold" id="totalProducts">60</p>
+                        <p class="text-sm">Produits disponibles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtres collants -->
+    <div class="sticky-filters">
+        <div class="container mx-auto px-4">
+            <div class="mb-4">
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Catégories:</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button class="category-filter px-4 py-2 bg-white rounded-lg border hover:bg-purple-50 active" data-category="all">Tous</button>
+                    <button class="category-filter px-4 py-2 bg-white rounded-lg border hover:bg-purple-50" data-category="chaussures-basket" id="filter-chaussures-basket">Chaussures de Basket</button>
+                    <button class="category-filter px-4 py-2 bg-white rounded-lg border hover:bg-purple-50" data-category="chaussures-foot" id="filter-chaussures-foot">Chaussures de Football</button>
+                    <button class="category-filter px-4 py-2 bg-white rounded-lg border hover:bg-purple-50" data-category="maillots" id="filter-maillots">Maillots</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Marques:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50 active" data-marque="all">Toutes</button>
+                        <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="nike">Nike</button>
+                        <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="adidas">Adidas</button>
+                        <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="puma">Puma</button>
+                        <button class="marque-filter px-4 py-2 bg-white rounded-lg border hover:bg-green-50" data-marque="jordan">Jordan</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Type:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50 active" data-filter="all">Tous</button>
+                        <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50" data-filter="homme">Homme</button>
+                        <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50" data-filter="femme">Femme</button>
+                        <button class="filter-btn px-4 py-2 bg-white rounded-lg border hover:bg-blue-50" data-filter="enfant">Enfant</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Prix:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50 active" data-price="all">Tous</button>
+                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="0-50">0-50€</button>
+                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="50-100">50-100€</button>
+                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="100+">100€+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Produits -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Les produits seront ajoutés dynamiquement ici -->
+            </div>
+            
+            <!-- Indicateur de chargement -->
+            <div id="loadingIndicator" class="text-center py-12 hidden">
+                <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                <p class="mt-4 text-gray-600">Chargement des produits...</p>
+            </div>
+            
+            <!-- Bouton "Voir plus" -->
+            <div id="loadMoreContainer" class="text-center mt-12">
+                <button id="loadMoreBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition">
+                    Charger plus de produits
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panier latéral -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-2xl font-bold">Mon Panier</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-800">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="mb-8">
+                <p id="emptyCartMessage" class="text-gray-500 text-center py-8">Votre panier est vide</p>
+            </div>
+            
+            <div class="border-t pt-4">
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Sous-total:</span>
+                    <span id="cartSubtotal" class="font-bold">0 €</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="font-medium">Livraison:</span>
+                    <span id="cartShipping" class="font-bold">Gratuite</span>
+                </div>
+                <div class="flex justify-between text-xl font-bold mb-8">
+                    <span>Total:</span>
+                    <span id="cartTotal">0 €</span>
+                </div>
+                
+                <button id="checkoutBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-lg hover:bg-blue-700 transition mb-4">Passer la commande</button>
+                <button id="continueShopping" class="w-full bg-gray-200 text-gray-800 font-bold py-4 rounded-lg hover:bg-gray-300 transition">Continuer mes achats</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay pour le panier -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                    
+                        <h2 class="text-2xl font-bold">Loum<span class="text-blue-400">Shoes</span></h2>
+                    </div>
+                    <p class="text-gray-300 mb-4">Votre destination pour l'équipement sportif de qualité.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Catégories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#chaussures-basket" class="text-gray-300 hover:text-white">Chaussures de basket</a></li>
+                        <li><a href="#chaussures-foot" class="text-gray-300 hover:text-white">Chaussures de football</a></li>
+                        <li><a href="#maillots" class="text-gray-300 hover:text-white">Maillots de football</a></li>
+                        <li><a href="index.html#promotions" class="text-gray-300 hover:text-white">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Service client</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Livraison & Retours</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Guide des tailles</a></li>
+                        <li><a href="index.html#contact" class="text-gray-300 hover:text-white">Contactez-nous</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <p class="text-gray-300 mb-4">Inscrivez-vous pour recevoir nos offres exclusives</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Votre email" class="flex-grow px-4 py-2 rounded-l-lg text-gray-800">
+                        <button class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2023 SportPro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Données des produits (60 produits: 20 chaussures basket, 20 chaussures foot, 20 maillots)
+        const allProducts = [
+            // Chaussures de basket (20 produits)
+            {
+                id: 1,
+                name: "Nike Air Jordan XXXVII",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "nike",
+                price: 179.99,
+                originalPrice: 199.99,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Performance ultime avec amorti Zoom Air.",
+                promo: true,
+                colors: ["Noir", "Rouge", "Blanc"],
+                popular: true,
+                stock: 15,
+                madeInChina: false
+            },
+            {
+                id: 2,
+                name: "Adidas Harden Vol. 7",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "adidas",
+                price: 149.99,
+                originalPrice: 149.99,
+                image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Conçues pour James Harden, agilité maximale.",
+                promo: false,
+                colors: ["Noir", "Blanc", "Bleu"],
+                stock: 8,
+                madeInChina: false
+            },
+            {
+                id: 3,
+                name: "Puma Clyde All-Pro",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "puma",
+                price: 129.99,
+                originalPrice: 139.99,
+                image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Léger et réactif pour le jeu rapide.",
+                promo: true,
+                colors: ["Noir", "Blanc", "Rouge"],
+                stock: 12,
+                madeInChina: false
+            },
+            {
+                id: 4,
+                name: "Nike LeBron 20",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "nike",
+                price: 199.99,
+                originalPrice: 199.99,
+                image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Puissance et contrôle pour le jeu intérieur.",
+                promo: false,
+                colors: ["Noir", "Or", "Pourpre"],
+                popular: true,
+                stock: 5,
+                madeInChina: false
+            },
+            {
+                id: 5,
+                name: "Under Armour Curry 10",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "under armour",
+                price: 159.99,
+                originalPrice: 179.99,
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Stabilité exceptionnelle pour les shooteurs.",
+                promo: true,
+                colors: ["Jaune", "Noir", "Bleu"],
+                stock: 10,
+                madeInChina: false
+            },
+            {
+                id: 6,
+                name: "Nike KD 15",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "nike",
+                price: 149.99,
+                originalPrice: 149.99,
+                image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Polyvalentes pour tous les terrains.",
+                promo: false,
+                colors: ["Orange", "Noir", "Blanc"],
+                stock: 18,
+                madeInChina: false
+            },
+            {
+                id: 7,
+                name: "Adidas Dame 8",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "adidas",
+                price: 139.99,
+                originalPrice: 149.99,
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Confort et réactivité pour Damian Lillard.",
+                promo: true,
+                colors: ["Rouge", "Noir", "Blanc"],
+                stock: 7,
+                madeInChina: false
+            },
+            {
+                id: 8,
+                name: "Nike Kyrie Infinity",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "nike",
+                price: 129.99,
+                originalPrice: 129.99,
+                image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Manœuvrabilité exceptionnelle.",
+                promo: false,
+                colors: ["Vert", "Noir", "Blanc"],
+                stock: 14,
+                madeInChina: false
+            },
+            {
+                id: 9,
+                name: "Jordan Zion 2",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "jordan",
+                price: 139.99,
+                originalPrice: 149.99,
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Puissance et explosivité pour Zion Williamson.",
+                promo: true,
+                colors: ["Bleu", "Noir", "Blanc"],
+                stock: 9,
+                madeInChina: false
+            },
+            {
+                id: 10,
+                name: "Puma MB.01",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "puma",
+                price: 129.99,
+                originalPrice: 129.99,
+                image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Édition LaMelo Ball, style unique.",
+                promo: false,
+                colors: ["Rose", "Noir", "Jaune"],
+                stock: 11,
+                madeInChina: false
+            },
+            {
+                id: 11,
+                name: "Nike Giannis Immortality 2",
+                category: "chaussures-basket",
+                type: "femme",
+                marque: "nike",
+                price: 89.99,
+                originalPrice: 99.99,
+                image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Accessibles et performantes.",
+                promo: true,
+                colors: ["Rose", "Blanc", "Noir"],
+                stock: 20,
+                madeInChina: false
+            },
+            {
+                id: 12,
+                name: "Adidas Exhibit B",
+                category: "chaussures-basket",
+                type: "enfant",
+                marque: "adidas",
+                price: 69.99,
+                originalPrice: 79.99,
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Parfaites pour les jeunes joueurs.",
+                promo: true,
+                colors: ["Bleu", "Rouge", "Noir"],
+                stock: 25,
+                madeInChina: false
+            },
+            {
+                id: 13,
+                name: "Nike Air Max Impact 4",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "nike",
+                price: 99.99,
+                originalPrice: 119.99,
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Amorti Max Air pour un confort optimal.",
+                promo: true,
+                colors: ["Noir", "Bleu", "Blanc"],
+                stock: 22,
+                madeInChina: false
+            },
+            {
+                id: 14,
+                name: "Adidas Trae Young 2",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "adidas",
+                price: 119.99,
+                originalPrice: 129.99,
+                image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Pour le jeu rapide et créatif.",
+                promo: true,
+                colors: ["Rouge", "Noir", "Blanc"],
+                stock: 16,
+                madeInChina: false
+            },
+            {
+                id: 15,
+                name: "Jordan Luka 1",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "jordan",
+                price: 134.99,
+                originalPrice: 149.99,
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Signature de Luka Doncic.",
+                promo: true,
+                colors: ["Bleu", "Noir", "Blanc"],
+                stock: 13,
+                madeInChina: false
+            },
+            {
+                id: 16,
+                name: "Nike GT Cut 2",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "nike",
+                price: 169.99,
+                originalPrice: 179.99,
+                image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Réactivité et explosivité.",
+                promo: true,
+                colors: ["Vert", "Noir", "Blanc"],
+                stock: 9,
+                madeInChina: false
+            },
+            {
+                id: 17,
+                name: "Adidas D.O.N. Issue 5",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "adidas",
+                price: 109.99,
+                originalPrice: 119.99,
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Pour Donovan Mitchell.",
+                promo: true,
+                colors: ["Orange", "Noir", "Blanc"],
+                stock: 17,
+                madeInChina: false
+            },
+            {
+                id: 18,
+                name: "Puma TRC Blaze Court",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "puma",
+                price: 119.99,
+                originalPrice: 129.99,
+                image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Confort et stabilité.",
+                promo: true,
+                colors: ["Noir", "Rouge", "Blanc"],
+                stock: 14,
+                madeInChina: false
+            },
+            {
+                id: 19,
+                name: "Nike Cosmic Unity 2",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "nike",
+                price: 149.99,
+                originalPrice: 159.99,
+                image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Durabilité et performance.",
+                promo: true,
+                colors: ["Vert", "Noir", "Blanc"],
+                stock: 11,
+                madeInChina: false
+            },
+            {
+                id: 20,
+                name: "Jordan Series 05",
+                category: "chaussures-basket",
+                type: "homme",
+                marque: "jordan",
+                price: 124.99,
+                originalPrice: 134.99,
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Performance accessible.",
+                promo: true,
+                colors: ["Gris", "Noir", "Blanc"],
+                stock: 19,
+                madeInChina: false
+            },
+            
+            // Chaussures de football (20 produits)
+            {
+                id: 21,
+                name: "Nike Mercurial Superfly 9 Elite",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "nike",
+                price: 279.99,
+                originalPrice: 299.99,
+                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Vitesse et précision ultimes.",
+                promo: true,
+                colors: ["Orange", "Noir", "Blanc"],
+                popular: true,
+                stock: 8,
+                madeInChina: false
+            },
+            {
+                id: 22,
+                name: "Adidas Predator Edge+",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "adidas",
+                price: 269.99,
+                originalPrice: 279.99,
+                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Contrôle et précision améliorés.",
+                promo: true,
+                colors: ["Rouge", "Noir", "Blanc"],
+                stock: 6,
+                madeInChina: false
+            },
+            {
+                id: 23,
+                name: "Puma Future Z 1.4",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "puma",
+                price: 229.99,
+                originalPrice: 249.99,
+                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Agilité et adaptabilité.",
+                promo: true,
+                colors: ["Vert", "Noir", "Blanc"],
+                stock: 10,
+                madeInChina: false
+            },
+            {
+                id: 24,
+                name: "Nike Phantom GT2 Elite",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "nike",
+                price: 259.99,
+                originalPrice: 279.99,
+                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Précision et contrôle.",
+                promo: true,
+                colors: ["Bleu", "Noir", "Blanc"],
+                stock: 7,
+                madeInChina: false
+            },
+            {
+                id: 25,
+                name: "Adidas X Speedportal+",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "adidas",
+                price: 249.99,
+                originalPrice: 269.99,
+                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Vitesse et légèreté.",
+                promo: true,
+                colors: ["Jaune", "Noir", "Blanc"],
+                stock: 9,
+                madeInChina: false
+            },
+            {
+                id: 26,
+                name: "Nike Tiempo Legend 9 Elite",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "nike",
+                price: 239.99,
+                originalPrice: 259.99,
+                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Confort et toucher de ballon.",
+                promo: true,
+                colors: ["Blanc", "Noir", "Or"],
+                stock: 11,
+                madeInChina: false
+            },
+            {
+                id: 27,
+                name: "Adidas Copa Sense+",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "adidas",
+                price: 229.99,
+                originalPrice: 249.99,
+                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Sensibilité et contrôle.",
+                promo: true,
+                colors: ["Blanc", "Noir", "Or"],
+                stock: 8,
+                madeInChina: false
+            },
+            {
+                id: 28,
+                name: "Puma Ultra Ultimate",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "puma",
+                price: 219.99,
+                originalPrice: 239.99,
+                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Légèreté et vitesse.",
+                promo: true,
+                colors: ["Rose", "Noir", "Blanc"],
+                stock: 12,
+                madeInChina: false
+            },
+            {
+                id: 29,
+                name: "Nike Mercurial Vapor 15 Elite",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "nike",
+                price: 269.99,
+                originalPrice: 289.99,
+                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Vitesse explosive.",
+                promo: true,
+                colors: ["Violet", "Noir", "Blanc"],
+                stock: 6,
+                madeInChina: false
+            },
+            {
+                id: 30,
+                name: "Adidas Predator Accuracy+",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "adidas",
+                price: 259.99,
+                originalPrice: 279.99,
+                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Précision maximale.",
+                promo: true,
+                colors: ["Bleu", "Noir", "Blanc"],
+                stock: 9,
+                madeInChina: false
+            },
+            {
+                id: 31,
+                name: "Nike Phantom GT2 Academy",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "nike",
+                price: 119.99,
+                originalPrice: 139.99,
+                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Version Academy du Phantom GT2.",
+                promo: true,
+                colors: ["Noir", "Bleu", "Blanc"],
+                stock: 20,
+                madeInChina: true,
+                usPrice: "$25"
+            },
+            {
+                id: 32,
+                name: "Adidas X Speedflow.3",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "adidas",
+                price: 89.99,
+                originalPrice: 109.99,
+                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Entrée de gamme de la série X.",
+                promo: true,
+                colors: ["Vert", "Noir", "Blanc"],
+                stock: 25,
+                madeInChina: true,
+                usPrice: "$18"
+            },
+            {
+                id: 33,
+                name: "Puma Future Play",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "puma",
+                price: 79.99,
+                originalPrice: 99.99,
+                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Future version play.",
+                promo: true,
+                colors: ["Noir", "Rouge", "Blanc"],
+                stock: 22,
+                madeInChina: true,
+                usPrice: "$16"
+            },
+            {
+                id: 34,
+                name: "Nike Tiempo Legend 9 Academy",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "nike",
+                price: 109.99,
+                originalPrice: 129.99,
+                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Version Academy du Tiempo.",
+                promo: true,
+                colors: ["Blanc", "Noir", "Bleu"],
+                stock: 18,
+                madeInChina: true,
+                usPrice: "$22"
+            },
+            {
+                id: 35,
+                name: "Adidas Predator Edge.3",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "adidas",
+                price: 99.99,
+                originalPrice: 119.99,
+                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Version .3 du Predator Edge.",
+                promo: true,
+                colors: ["Rouge", "Noir", "Blanc"],
+                stock: 21,
+                madeInChina: true,
+                usPrice: "$20"
+            },
+            {
+                id: 36,
+                name: "Puma Ultra Match",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "puma",
+                price: 69.99,
+                originalPrice: 89.99,
+                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Ultra version match.",
+                promo: true,
+                colors: ["Orange", "Noir", "Blanc"],
+                stock: 24,
+                madeInChina: true,
+                usPrice: "$14"
+            },
+            {
+                id: 37,
+                name: "Nike Mercurial Superfly 9 Academy",
+                category: "chaussures-foot",
+                type: "femme",
+                marque: "nike",
+                price: 119.99,
+                originalPrice: 139.99,
+                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Mercurial pour femmes.",
+                promo: true,
+                colors: ["Rose", "Blanc", "Noir"],
+                stock: 15,
+                madeInChina: true,
+                usPrice: "$25"
+            },
+            {
+                id: 38,
+                name: "Adidas Predator Edge.3 FG",
+                category: "chaussures-foot",
+                type: "enfant",
+                marque: "adidas",
+                price: 59.99,
+                originalPrice: 79.99,
+                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Predator pour enfants.",
+                promo: true,
+                colors: ["Bleu", "Rouge", "Blanc"],
+                stock: 30,
+                madeInChina: true,
+                usPrice: "$12"
+            },
+            {
+                id: 39,
+                name: "Nike Phantom GT2 Club",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "nike",
+                price: 79.99,
+                originalPrice: 99.99,
+                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Version Club du Phantom GT2.",
+                promo: true,
+                colors: ["Noir", "Vert", "Blanc"],
+                stock: 28,
+                madeInChina: true,
+                usPrice: "$16"
+            },
+            {
+                id: 40,
+                name: "Adidas Copa Sense.3",
+                category: "chaussures-foot",
+                type: "homme",
+                marque: "adidas",
+                price: 89.99,
+                originalPrice: 109.99,
+                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Version .3 du Copa Sense.",
+                promo: true,
+                colors: ["Blanc", "Noir", "Or"],
+                stock: 23,
+                madeInChina: true,
+                usPrice: "$18"
+            },
+            
+            // Maillots de football (20 produits)
+            {
+                id: 41,
+                name: "2025-26 Relié Maillot Player Version Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 27.36,
+                originalPrice: 34.20,
+                image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot version joueur 2025-26, qualité premium.",
+                promo: true,
+                colors: ["Bleu", "Blanc"],
+                stock: 50,
+                madeInChina: true,
+                usPrice: "$5",
+                popular: true
+            },
+            {
+                id: 42,
+                name: "Brazil Jersey 2024-2025-2026 Soccer",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 27.36,
+                originalPrice: 34.20,
+                image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot Brésil officiel pour les 3 prochaines saisons.",
+                promo: true,
+                colors: ["Jaune", "Vert", "Bleu"],
+                stock: 45,
+                madeInChina: true,
+                usPrice: "$5"
+            },
+            {
+                id: 43,
+                name: "European Cup Football Shirt 2024-2025",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 44.80,
+                originalPrice: 56.00,
+                image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot Édition Spéciale Coupe d'Europe.",
+                promo: true,
+                colors: ["Blanc", "Or"],
+                stock: 30,
+                madeInChina: true,
+                usPrice: "$8"
+            },
+            {
+                id: 44,
+                name: "Maillot De Foot Set Thai Brazil Soccer",
+                category: "maillots",
+                type: "homme",
+                marque: "puma",
+                price: 75.09,
+                originalPrice: 93.86,
+                image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Pack spécial Brésil avec short et chaussettes.",
+                promo: false,
+                colors: ["Jaune", "Vert"],
+                stock: 15,
+                madeInChina: true,
+                usPrice: "$14"
+            },
+            {
+                id: 45,
+                name: "2006 Season France Away Retro Player Version",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 44.80,
+                originalPrice: 56.00,
+                image: "https://images.unsplash.com/photo-1594736797933-d6301c6c8f54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Édition rétro France 2006, version joueur.",
+                promo: true,
+                colors: ["Blanc", "Bleu"],
+                stock: 25,
+                madeInChina: true,
+                usPrice: "$8"
+            },
+            {
+                id: 46,
+                name: "Dropshipping Soccer Jersey High Quality",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 34.31,
+                originalPrice: 42.89,
+                image: "https://images.unsplash.com/photo-1626248801379-51a0748a5f96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Haute qualité, parfait pour le dropshipping.",
+                promo: true,
+                colors: ["Rouge", "Noir"],
+                stock: 100,
+                madeInChina: true,
+                usPrice: "$10"
+            },
+            {
+                id: 47,
+                name: "2025 High Quality Men's Soccer Jersey Training",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 34.31,
+                originalPrice: 42.89,
+                image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot d'entraînement haute qualité 2025.",
+                promo: true,
+                colors: ["Noir", "Gris"],
+                stock: 60,
+                madeInChina: true,
+                usPrice: "$10"
+            },
+            {
+                id: 48,
+                name: "Dropshipping 1992 Germany Retro Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 159.75,
+                originalPrice: 199.69,
+                image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Édition rétro Allemagne 1992, collectionneur.",
+                promo: false,
+                colors: ["Blanc", "Noir"],
+                stock: 12,
+                madeInChina: true,
+                usPrice: "$28"
+            },
+            {
+                id: 49,
+                name: "2025-26 Al Hilal Soccer Jersey Home Away Men",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 27.36,
+                originalPrice: 34.20,
+                image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile et extérieur Al Hilal.",
+                promo: true,
+                colors: ["Bleu", "Blanc"],
+                stock: 40,
+                madeInChina: true,
+                usPrice: "$5"
+            },
+            {
+                id: 50,
+                name: "2024/25 Paris Home/Away Soccer Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 44.80,
+                originalPrice: 56.00,
+                image: "https://images.unsplash.com/photo-1594736797933-d6301c6c8f54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile et extérieur Paris 2024/25.",
+                promo: true,
+                colors: ["Bleu", "Rouge"],
+                stock: 35,
+                madeInChina: true,
+                usPrice: "$8"
+            },
+            {
+                id: 51,
+                name: "Argentina 2022 World Cup Champion Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 52.50,
+                originalPrice: 65.63,
+                image: "https://images.unsplash.com/photo-1626248801379-51a0748a5f96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot champion du monde 2022 Argentine.",
+                promo: true,
+                colors: ["Bleu", "Blanc"],
+                stock: 28,
+                madeInChina: true,
+                usPrice: "$9"
+            },
+            {
+                id: 52,
+                name: "Manchester United 2024/25 Home Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 68.90,
+                originalPrice: 86.13,
+                image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile Manchester United 2024/25.",
+                promo: false,
+                colors: ["Rouge", "Noir"],
+                stock: 22,
+                madeInChina: true,
+                usPrice: "$12"
+            },
+            {
+                id: 53,
+                name: "Barcelona 2024/25 Away Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 61.25,
+                originalPrice: 76.56,
+                image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot extérieur FC Barcelone 2024/25.",
+                promo: true,
+                colors: ["Jaune", "Bleu"],
+                stock: 30,
+                madeInChina: true,
+                usPrice: "$11"
+            },
+            {
+                id: 54,
+                name: "Chelsea 2024/25 Third Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 47.60,
+                originalPrice: 59.50,
+                image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Troisième maillot Chelsea 2024/25.",
+                promo: true,
+                colors: ["Vert", "Blanc"],
+                stock: 18,
+                madeInChina: true,
+                usPrice: "$8"
+            },
+            {
+                id: 55,
+                name: "AC Milan 2024/25 Home Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "puma",
+                price: 58.80,
+                originalPrice: 73.50,
+                image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile AC Milan 2024/25.",
+                promo: false,
+                colors: ["Rouge", "Noir"],
+                stock: 20,
+                madeInChina: true,
+                usPrice: "$10"
+            },
+            {
+                id: 56,
+                name: "Bayern Munich 2024/25 Away Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 65.45,
+                originalPrice: 81.81,
+                image: "https://images.unsplash.com/photo-1594736797933-d6301c6c8f54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot extérieur Bayern Munich 2024/25.",
+                promo: true,
+                colors: ["Noir", "Rose"],
+                stock: 25,
+                madeInChina: true,
+                usPrice: "$11"
+            },
+            {
+                id: 57,
+                name: "Liverpool 2024/25 Home Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 63.70,
+                originalPrice: 79.63,
+                image: "https://images.unsplash.com/photo-1626248801379-51a0748a5f96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile Liverpool 2024/25.",
+                promo: false,
+                colors: ["Rouge", "Blanc"],
+                stock: 32,
+                madeInChina: true,
+                usPrice: "$11"
+            },
+            {
+                id: 58,
+                name: "Real Madrid 2024/25 Third Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 49.00,
+                originalPrice: 61.25,
+                image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Troisième maillot Real Madrid 2024/25.",
+                promo: true,
+                colors: ["Violet", "Noir"],
+                stock: 15,
+                madeInChina: true,
+                usPrice: "$9"
+            },
+            {
+                id: 59,
+                name: "Juventus 2024/25 Home Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 56.35,
+                originalPrice: 70.44,
+                image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile Juventus 2024/25.",
+                promo: false,
+                colors: ["Noir", "Blanc"],
+                stock: 28,
+                madeInChina: true,
+                usPrice: "$10"
+            },
+            {
+                id: 60,
+                name: "Atletico Madrid 2024/25 Home Jersey",
+                category: "maillots",
+                type: "homme",
+                marque: "nike",
+                price: 51.45,
+                originalPrice: 64.31,
+                image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile Atletico Madrid 2024/25.",
+                promo: true,
+                colors: ["Rouge", "Blanc"],
+                stock: 23,
+                madeInChina: true,
+                usPrice: "$9"
+            }
+        ];
+
+        // État de l'application
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let currentCategory = 'all';
+        let currentFilter = 'all';
+        let currentMarque = 'all';
+        let currentPrice = 'all';
+        let displayedProducts = 12;
+        const productsPerLoad = 12;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si on a un hash dans l'URL pour filtrer par catégorie
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                activateCategoryFromHash(hash);
+            } else {
+                renderProducts();
+            }
+            
+            setupEventListeners();
+            updateCartCount();
+            
+            // Mettre à jour le compteur de produits
+            document.getElementById('totalProducts').textContent = allProducts.length;
+        });
+
+        // Activation de catégorie depuis le hash
+        function activateCategoryFromHash(hash) {
+            let category = 'all';
+            
+            if (hash === 'chaussures-basket') category = 'chaussures-basket';
+            else if (hash === 'chaussures-foot') category = 'chaussures-foot';
+            else if (hash === 'maillots') category = 'maillots';
+            else if (hash === 'promotions') {
+                // Activer le filtre promotions
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.filter-btn[data-filter="promo"]').classList.add('active');
+                currentFilter = 'promo';
+            }
+            
+            // Activer le filtre de catégorie
+            document.querySelectorAll('.category-filter').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.category-filter[data-category="${category}"]`).classList.add('active');
+            currentCategory = category;
+            
+            // Réinitialiser les autres filtres
+            currentMarque = 'all';
+            currentPrice = 'all';
+            
+            // Réinitialiser les boutons de filtre
+            if (hash !== 'promotions') {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+                currentFilter = 'all';
+            }
+            
+            document.querySelectorAll('.marque-filter').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.marque-filter[data-marque="all"]').classList.add('active');
+            
+            document.querySelectorAll('.price-filter').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.price-filter[data-price="all"]').classList.add('active');
+            
+            // Réinitialiser l'affichage
+            displayedProducts = 12;
+            
+            // Rendre les produits
+            renderProducts();
+            
+            // Faire défiler vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Configuration des événements
+        function setupEventListeners() {
+            // Filtres de catégorie
+            document.querySelectorAll('.category-filter').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Mettre à jour le filtre actif
+                    document.querySelectorAll('.category-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour la catégorie actuelle
+                    currentCategory = this.getAttribute('data-category');
+                    displayedProducts = 12;
+                    renderProducts();
+                });
+            });
+
+            // Boutons de filtre (type)
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Mettre à jour le filtre actif
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour le filtre actuel
+                    currentFilter = this.getAttribute('data-filter');
+                    displayedProducts = 12;
+                    renderProducts();
+                });
+            });
+
+            // Filtres marque
+            document.querySelectorAll('.marque-filter').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Mettre à jour le filtre actif
+                    document.querySelectorAll('.marque-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour la marque actuelle
+                    currentMarque = this.getAttribute('data-marque');
+                    displayedProducts = 12;
+                    renderProducts();
+                });
+            });
+
+            // Filtres prix
+            document.querySelectorAll('.price-filter').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Mettre à jour le filtre actif
+                    document.querySelectorAll('.price-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mettre à jour le filtre prix actuel
+                    currentPrice = this.getAttribute('data-price');
+                    displayedProducts = 12;
+                    renderProducts();
+                });
+            });
+
+            // Bouton "Charger plus"
+            document.getElementById('loadMoreBtn').addEventListener('click', loadMoreProducts);
+
+            // Panier
+            document.getElementById('cartToggle').addEventListener('click', openCart);
+            document.getElementById('closeCart').addEventListener('click', closeCart);
+            document.getElementById('continueShopping').addEventListener('click', closeCart);
+            document.getElementById('cartOverlay').addEventListener('click', closeCart);
+            document.getElementById('checkoutBtn').addEventListener('click', checkout);
+
+            // Menu mobile
+            document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+        }
+
+        // Rendu des produits
+        function renderProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            // Afficher l'indicateur de chargement
+            document.getElementById('loadingIndicator').classList.remove('hidden');
+            
+            // Simuler un petit délai pour l'animation
+            setTimeout(() => {
+                // Filtrer les produits selon tous les critères
+                const filteredProducts = allProducts.filter(product => {
+                    // Filtre par catégorie
+                    const categoryMatch = currentCategory === 'all' || product.category === currentCategory;
+                    
+                    // Filtre par type
+                    let filterMatch = false;
+                    if (currentFilter === 'all') filterMatch = true;
+                    else if (currentFilter === 'promo') filterMatch = product.promo;
+                    else filterMatch = product.type === currentFilter;
+                    
+                    // Filtre par marque
+                    const marqueMatch = currentMarque === 'all' || product.marque === currentMarque;
+                    
+                    // Filtre par prix
+                    let priceMatch = false;
+                    if (currentPrice === 'all') priceMatch = true;
+                    else if (currentPrice === '0-50') priceMatch = product.price <= 50;
+                    else if (currentPrice === '50-100') priceMatch = product.price > 50 && product.price <= 100;
+                    else if (currentPrice === '100+') priceMatch = product.price > 100;
+                    
+                    return categoryMatch && filterMatch && marqueMatch && priceMatch;
+                });
+                
+                // Mettre à jour le compteur de produits filtrés
+                document.getElementById('totalProducts').textContent = filteredProducts.length;
+                
+                // Limiter le nombre de produits affichés
+                const productsToShow = filteredProducts.slice(0, displayedProducts);
+                
+                // Afficher les produits filtrés
+                productsToShow.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card bg-white rounded-lg shadow-lg overflow-hidden';
+                    
+                    // Badge de promotion
+                    const promoBadge = product.promo ? 
+                        `<div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold promo-badge">-${Math.round((1 - product.price/product.originalPrice)*100)}%</div>` : '';
+                    
+                    // Badge populaire
+                    const popularBadge = product.popular ? 
+                        `<div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">Populaire</div>` : '';
+                    
+                    // Badge stock
+                    const stockBadge = product.stock < 10 ? 
+                        `<div class="absolute bottom-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">Stock limité</div>` : 
+                        `<div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">En stock</div>`;
+                    
+                    // Prix original barré si en promotion
+                    const originalPriceDisplay = product.promo ? 
+                        `<span class="text-gray-500 line-through text-sm">${product.originalPrice.toFixed(2)} €</span>` : '';
+                    
+                    // Icône selon la catégorie
+                    let categoryIcon = '';
+                    let categoryText = '';
+                    
+                    if (product.category === 'chaussures-basket') {
+                        categoryIcon = '<i class="fas fa-basketball-ball text-orange-500 mr-1"></i>';
+                        categoryText = 'Basket';
+                    } else if (product.category === 'chaussures-foot') {
+                        categoryIcon = '<i class="fas fa-futbol text-green-500 mr-1"></i>';
+                        categoryText = 'Football';
+                    } else if (product.category === 'maillots') {
+                        categoryIcon = '<i class="fas fa-tshirt text-red-500 mr-1"></i>';
+                        categoryText = 'Maillot';
+                    }
+                    
+                    // Badge "Made in China" pour certains produits
+                    const madeInChinaBadge = product.madeInChina ? 
+                        `<div class="made-in-china-badge">${product.usPrice ? product.usPrice + ' (US $)' : ''} made-in-china.com</div>` : '';
+                    
+                    // Sélecteur de quantité
+                    const quantitySelector = `
+                        <div class="flex items-center mt-4 mb-2">
+                            <span class="text-gray-500 text-sm mr-2">Quantité:</span>
+                            <div class="quantity-selector flex items-center border rounded-lg">
+                                <button class="decrease-quantity px-3 py-1 text-gray-500 hover:text-blue-600" data-id="${product.id}">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="quantity-value px-3 py-1 border-x" data-id="${product.id}">1</span>
+                                <button class="increase-quantity px-3 py-1 text-gray-500 hover:text-blue-600" data-id="${product.id}">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    productCard.innerHTML = `
+                        <div class="relative">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                            ${promoBadge}
+                            ${popularBadge}
+                            ${stockBadge}
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-gray-800">${product.name}</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded flex items-center">
+                                    ${categoryIcon} ${categoryText}
+                                </span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <span class="text-gray-500 text-sm mr-2">${product.marque.charAt(0).toUpperCase() + product.marque.slice(1)}</span>
+                                <span class="text-gray-500 text-sm">• ${product.type.charAt(0).toUpperCase() + product.type.slice(1)}</span>
+                                <span class="text-gray-500 text-sm ml-2">• Stock: ${product.stock}</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">${product.description}</p>
+                            <div class="flex items-center mb-4">
+                                <span class="text-gray-500 text-sm mr-2">Couleurs:</span>
+                                <div class="flex space-x-1">
+                                    ${product.colors.map(color => `<span class="h-4 w-4 rounded-full border" style="background-color: ${getColorCode(color)}" title="${color}"></span>`).join('')}
+                                </div>
+                            </div>
+                            ${quantitySelector}
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-2xl font-bold text-blue-600">${product.price.toFixed(2)} €</p>
+                                    ${originalPriceDisplay}
+                                    ${madeInChinaBadge}
+                                </div>
+                                <button class="add-to-cart-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition" data-id="${product.id}">
+                                    <i class="fas fa-cart-plus mr-2"></i>Ajouter
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    productsGrid.appendChild(productCard);
+                });
+                
+                // Masquer l'indicateur de chargement
+                document.getElementById('loadingIndicator').classList.add('hidden');
+                
+                // Afficher ou masquer le bouton "Charger plus"
+                if (filteredProducts.length > displayedProducts) {
+                    document.getElementById('loadMoreContainer').classList.remove('hidden');
+                } else {
+                    document.getElementById('loadMoreContainer').classList.add('hidden');
+                }
+                
+                // Ajouter des écouteurs d'événements aux boutons "Ajouter au panier"
+                document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        const quantityElement = document.querySelector(`.quantity-value[data-id="${productId}"]`);
+                        const quantity = parseInt(quantityElement.textContent);
+                        addToCart(productId, quantity);
+                    });
+                });
+                
+                // Ajouter des écouteurs pour les boutons de quantité
+                document.querySelectorAll('.increase-quantity').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        const quantityElement = document.querySelector(`.quantity-value[data-id="${productId}"]`);
+                        let quantity = parseInt(quantityElement.textContent);
+                        const product = allProducts.find(p => p.id === productId);
+                        
+                        // Ne pas dépasser le stock disponible
+                        if (quantity < product.stock) {
+                            quantity++;
+                            quantityElement.textContent = quantity;
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.decrease-quantity').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        const quantityElement = document.querySelector(`.quantity-value[data-id="${productId}"]`);
+                        let quantity = parseInt(quantityElement.textContent);
+                        
+                        if (quantity > 1) {
+                            quantity--;
+                            quantityElement.textContent = quantity;
+                        }
+                    });
+                });
+            }, 300); // Petit délai pour l'animation
+        }
+
+        // Charger plus de produits
+        function loadMoreProducts() {
+            displayedProducts += productsPerLoad;
+            renderProducts();
+            
+            // Faire défiler légèrement vers le bas pour voir les nouveaux produits
+            window.scrollBy({ top: 200, behavior: 'smooth' });
+        }
+
+        // Fonction pour obtenir un code couleur approximatif
+        function getColorCode(colorName) {
+            const colorMap = {
+                'Noir': '#000000',
+                'Blanc': '#FFFFFF',
+                'Rouge': '#FF0000',
+                'Bleu': '#0000FF',
+                'Vert': '#008000',
+                'Rose': '#FFC0CB',
+                'Jaune': '#FFFF00',
+                'Orange': '#FFA500',
+                'Pourpre': '#800080',
+                'Or': '#FFD700',
+                'Gris': '#808080',
+                'Violet': '#800080',
+                'Multicolor': 'linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)'
+            };
+            return colorMap[colorName] || '#CCCCCC';
+        }
+
+        // Gestion du panier
+        function addToCart(productId, quantity = 1) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Vérifier le stock disponible
+            if (quantity > product.stock) {
+                showNotification(`Stock insuffisant! Il ne reste que ${product.stock} unité(s) de ${product.name}.`, 'error');
+                return;
+            }
+            
+            // Vérifier si le produit est déjà dans le panier
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                // Vérifier si la quantité totale dépasse le stock
+                if (existingItem.quantity + quantity > product.stock) {
+                    showNotification(`Vous ne pouvez pas ajouter ${quantity} unité(s) supplémentaires. Stock maximum: ${product.stock}.`, 'error');
+                    return;
+                }
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity
+                });
+            }
+            
+            // Sauvegarder dans localStorage
+            saveCart();
+            
+            // Mettre à jour l'affichage
+            updateCartCount();
+            updateCartDisplay();
+            
+            // Afficher une notification
+            showNotification(`${quantity} ${product.name} a été ajouté au panier!`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p id="emptyCartMessage" class="text-gray-500 text-center py-8">Votre panier est vide</p>';
+                document.getElementById('cartSubtotal').textContent = '0 €';
+                document.getElementById('cartTotal').textContent = '0 €';
+                return;
+            }
+            
+            // Supprimer le message "panier vide"
+            emptyCartMessage?.remove();
+            
+            // Afficher les articles du panier
+            let cartHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const product = allProducts.find(p => p.id === item.id);
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                cartHTML += `
+                    <div class="cart-item flex items-center border-b py-4">
+                        <div class="w-16 h-16 mr-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">${item.name}</h4>
+                            <div class="text-sm text-gray-500">${item.price.toFixed(2)} € / unité</div>
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="flex items-center">
+                                    <button class="decrease-qty text-gray-500 hover:text-blue-600 mr-2" data-id="${item.id}">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span class="quantity-display font-medium">${item.quantity}</span>
+                                    <button class="increase-qty text-gray-500 hover:text-blue-600 ml-2" data-id="${item.id}">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="font-bold mr-4">${itemTotal.toFixed(2)} €</span>
+                                    <button class="remove-item text-red-500 hover:text-red-700" data-id="${item.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            ${product && item.quantity > product.stock ? 
+                                '<div class="text-red-500 text-sm mt-1">Stock limité! Maximum: ' + product.stock + '</div>' : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = cartHTML;
+            
+            // Mettre à jour les totaux
+            document.getElementById('cartSubtotal').textContent = `${subtotal.toFixed(2)} €`;
+            
+            // Calculer les frais de livraison (gratuits à partir de 50€)
+            const shipping = subtotal >= 50 ? 0 : 4.99;
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)} €`;
+            
+            const total = subtotal + shipping;
+            document.getElementById('cartTotal').textContent = `${total.toFixed(2)} €`;
+            
+            // Ajouter des écouteurs d'événements pour les boutons du panier
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    removeFromCart(productId);
+                });
+            });
+            
+            document.querySelectorAll('.increase-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === productId);
+                    const product = allProducts.find(p => p.id === productId);
+                    
+                    if (item && product) {
+                        // Vérifier le stock
+                        if (item.quantity < product.stock) {
+                            item.quantity += 1;
+                            saveCart();
+                            updateCartCount();
+                            updateCartDisplay();
+                        } else {
+                            showNotification(`Stock maximum atteint pour ${product.name}!`, 'error');
+                        }
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.decrease-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === productId);
+                    if (item) {
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                        } else {
+                            removeFromCart(productId);
+                        }
+                        saveCart();
+                        updateCartCount();
+                        updateCartDisplay();
+                    }
+                });
+            });
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.remove('translate-x-full');
+            document.getElementById('cartOverlay').classList.remove('hidden');
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.add('translate-x-full');
+            document.getElementById('cartOverlay').classList.add('hidden');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Votre panier est vide. Ajoutez des produits avant de passer commande.', 'error');
+                return;
+            }
+            
+            // Vérifier le stock avant de finaliser la commande
+            let stockError = false;
+            let errorMessage = '';
+            
+            cart.forEach(item => {
+                const product = allProducts.find(p => p.id === item.id);
+                if (product && item.quantity > product.stock) {
+                    stockError = true;
+                    errorMessage += `- ${product.name}: Stock disponible: ${product.stock}, Quantité demandée: ${item.quantity}\n`;
+                }
+            });
+            
+            if (stockError) {
+                showNotification('Certains produits ne sont plus disponibles en quantité suffisante:\n' + errorMessage, 'error');
+                return;
+            }
+            
+            // Simuler le processus de commande
+            const total = document.getElementById('cartTotal').textContent;
+            showNotification(`Commande passée avec succès! Total: ${total}. Un email de confirmation vous sera envoyé.`);
+            
+            // Vider le panier
+            cart = [];
+            saveCart();
+            updateCartCount();
+            updateCartDisplay();
+            closeCart();
+        }
+
+        function showNotification(message, type = 'success') {
+            // Créer une notification temporaire
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse max-w-md`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Supprimer la notification après 5 secondes
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

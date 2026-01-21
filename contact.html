@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - LoumShoes | Chaussures & Maillots</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles personnalisés */
+        .contact-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .form-input:focus {
+            outline: none;
+            ring: 2px solid #3b82f6;
+        }
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-question {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .faq-question:hover {
+            color: #3b82f6;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .rotate-0 {
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+        .loading {
+            display: none;
+        }
+        .loading.active {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- En-tête / Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+               <!-- Logo -->
+               <div class="flex items-center space-x-2">
+    <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-12 w-auto">
+    <h1 class="text-2xl font-bold text-gray-800">LOUM BUSINESS<span class="text-blue-600">CORPORATIONS</span></h1>
+</div>
+                
+                <!-- Navigation desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-blue-600 font-medium">Catalogue</a>
+                    <a href="contact.html" class="text-blue-600 font-medium border-b-2 border-blue-600">Contact</a>
+                    <a href="index.html#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
+                    <a href="index.html#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
+                </nav>
+                
+                <!-- Icônes panier et menu mobile -->
+                <div class="flex items-center space-x-6">
+                    <!-- Panier avec compteur -->
+                    <div class="relative">
+                        <button id="cartToggle" class="text-gray-700 hover:text-blue-600">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Menu mobile -->
+                    <button id="mobileMenuToggle" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Menu mobile -->
+            <div id="mobileMenu" class="hidden md:hidden py-4 border-t">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-blue-600 font-medium">Catalogue</a>
+                    <a href="contact.html" class="text-blue-600 font-medium">Contact</a>
+                    <a href="index.html#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
+                    <a href="index.html#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière Contact -->
+    <section class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Contactez-nous</h1>
+                <p class="text-lg md:text-xl">Notre équipe est à votre disposition pour répondre à toutes vos questions</p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/20 px-6 py-3 rounded-lg inline-block">
+                        <p class="text-sm">Réponse sous <span class="font-bold">24h</span> maximum</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact Principale -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Formulaire de Contact -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-lg p-8 contact-card">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Envoyez-nous un message</h2>
+                        <p class="text-gray-600 mb-8">Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais</p>
+                        
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstName" class="block text-gray-700 font-medium mb-2">Prénom *</label>
+                                    <input type="text" id="firstName" name="firstName" required 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 form-input"
+                                           placeholder="Votre prénom">
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-gray-700 font-medium mb-2">Nom *</label>
+                                    <input type="text" id="lastName" name="lastName" required 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 form-input"
+                                           placeholder="Votre nom">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-medium mb-2">Email *</label>
+                                    <input type="email" id="email" name="email" required 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 form-input"
+                                           placeholder="votre@email.com">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-gray-700 font-medium mb-2">Téléphone</label>
+                                    <input type="tel" id="phone" name="phone" 
+                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 form-input"
+                                           placeholder="+221 77 550 76 37">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Sujet *</label>
+                                <select id="subject" name="subject" required 
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 form-input">
+                                    <option value="">Sélectionnez un sujet</option>
+                                    <option value="commande">Commande et livraison</option>
+                                    <option value="retour">Retour et remboursement</option>
+                                    <option value="produit">Question sur un produit</option>
+                                    <option value="partenariat">Partenariat professionnel</option>
+                                    <option value="autre">Autre question</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message *</label>
+                                <textarea id="message" name="message" rows="6" required 
+                                          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 form-input resize-none"
+                                          placeholder="Décrivez-nous votre demande en détail..."></textarea>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <input type="checkbox" id="newsletter" name="newsletter" 
+                                       class="mt-1 mr-3 h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
+                                <label for="newsletter" class="text-gray-700">
+                                    Je souhaite m'abonner à la newsletter pour recevoir les offres exclusives et nouveautés
+                                </label>
+                            </div>
+                            
+                            <div class="pt-4 relative">
+                                <button type="submit" id="submitBtn"
+                                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:-translate-y-1">
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                    <span id="submitText">Envoyer le message</span>
+                                    <span id="loadingSpinner" class="loading">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Envoi en cours...
+                                    </span>
+                                </button>
+                                <div id="formMessage" class="mt-4 text-center hidden"></div>
+                            </div>
+                            
+                            <p class="text-gray-500 text-sm text-center">
+                                * Champs obligatoires. Vos données sont traitées conformément à notre 
+                                <a href="#" class="text-blue-600 hover:underline">politique de confidentialité</a>.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Informations de Contact -->
+                <div class="space-y-8">
+                    <!-- Carte Contact -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 contact-card">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Nos coordonnées</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-map-marker-alt text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Adresse</h4>
+                                    <p class="text-gray-600">Dakar<br>Colobane, Dakar, Sénégal</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-phone text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Téléphone</h4>
+                                    <p class="text-gray-600">+221 77 550 76 37</p>
+                                    <p class="text-gray-500 text-sm mt-1">Lun-Ven: 9h-18h</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-red-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-envelope text-red-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                                    <p class="text-gray-600">thiernoloumsa@gmail.com</p>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-clock text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Horaires d'ouverture</h4>
+                                    <p class="text-gray-600">Lundi - Vendredi: 9h - 18h</p>
+                                    <p class="text-gray-600">Samedi: 10h - 16h</p>
+                                    <p class="text-gray-600">Dimanche: Fermé</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-8 border-t">
+                            <h4 class="font-bold text-gray-800 mb-4">Suivez-nous</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-800 p-3 rounded-lg transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-gray-100 hover:bg-blue-400 hover:text-white text-gray-800 p-3 rounded-lg transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="bg-gray-100 hover:bg-pink-600 hover:text-white text-gray-800 p-3 rounded-lg transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-gray-100 hover:bg-blue-700 hover:text-white text-gray-800 p-3 rounded-lg transition">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   <!-- Carte de localisation -->
+<div class="bg-white rounded-xl shadow-lg overflow-hidden contact-card">
+    <div class="p-6">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Notre localisation</h3>
+        <div class="map-container">
+            <!-- Carte Google Maps intégrée (version simplifiée avec image) -->
+            <div class="bg-gray-200 h-64 relative">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-map-marked-alt text-4xl text-blue-600 mb-4"></i>
+                        <p class="text-gray-700 font-medium">Dakar, Sénégal</p>
+                        <p class="text-gray-500 text-sm">Avenue Léopold Sédar Senghor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-800 text-white p-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="font-bold">LoumShoes Store Dakar</p>
+                        <p class="text-sm text-gray-300">Ouvert jusqu'à 18h</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=Avenue+Léopold+Sédar+Senghor+Dakar+Sénégal" 
+                       target="_blank" 
+                       class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                        Itinéraire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Le reste du code reste identique... -->
+    <!-- (J'ai coupé le reste pour économiser de l'espace, mais il reste le même) -->
+
+    <script>
+        // Configuration de l'URL du backend
+        const BACKEND_URL = 'http://localhost:3000'; // À modifier avec votre URL de production
+
+        // Données du panier (partagées entre les pages)
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            updateCartCount();
+            initializeFAQ();
+            
+            // Initialiser les animations au défilement
+            setupScrollAnimations();
+        });
+
+        // Configuration des événements
+        function setupEventListeners() {
+            // Formulaire de contact
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleFormSubmit();
+                });
+            }
+
+            // Panier
+            document.getElementById('cartToggle')?.addEventListener('click', openCart);
+            document.getElementById('closeCart')?.addEventListener('click', closeCart);
+            document.getElementById('continueShopping')?.addEventListener('click', closeCart);
+            document.getElementById('cartOverlay')?.addEventListener('click', closeCart);
+            document.getElementById('checkoutBtn')?.addEventListener('click', checkout);
+
+            // Menu mobile
+            document.getElementById('mobileMenuToggle')?.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+        }
+
+        // Initialisation des FAQ
+        function initializeFAQ() {
+            // Ouvrir la première FAQ par défaut
+            toggleFAQ(1);
+        }
+
+        // Basculer l'état d'une FAQ
+        function toggleFAQ(index) {
+            const answer = document.getElementById(`faq-answer-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            
+            if (answer.classList.contains('open')) {
+                answer.classList.remove('open');
+                icon.classList.remove('rotate-180');
+                icon.classList.add('rotate-0');
+            } else {
+                // Fermer toutes les autres FAQ
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    item.classList.remove('open');
+                });
+                document.querySelectorAll('.faq-question i').forEach(item => {
+                    item.classList.remove('rotate-180');
+                    item.classList.add('rotate-0');
+                });
+                
+                // Ouvrir la FAQ sélectionnée
+                answer.classList.add('open');
+                icon.classList.remove('rotate-0');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // Animation des cartes au défilement
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fadeIn');
+                    }
+                });
+            }, observerOptions);
+
+            // Observer les cartes de contact
+            document.querySelectorAll('.contact-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Gestion du formulaire de contact avec connexion au backend
+        async function handleFormSubmit() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Récupérer les données du formulaire
+            const formData = new FormData(form);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            
+            // Ajouter la date et l'heure
+            formObject.timestamp = new Date().toISOString();
+            formObject.source = 'LoumShoes Website Contact Form';
+            
+            // Afficher l'indicateur de chargement
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            loadingSpinner.classList.add('active');
+            formMessage.classList.add('hidden');
+            
+            try {
+                // Envoyer les données au backend
+                const response = await fetch(`${BACKEND_URL}/api/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formObject),
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Succès
+                    showFormMessage('Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.', 'success');
+                    form.reset();
+                    
+                    // Afficher une notification
+                    showNotification('Message envoyé avec succès !', 'success');
+                } else {
+                    // Erreur du serveur
+                    showFormMessage(result.message || 'Une erreur est survenue. Veuillez réessayer plus tard.', 'error');
+                    console.error('Erreur serveur:', result);
+                }
+            } catch (error) {
+                // Erreur de connexion
+                console.error('Erreur de connexion:', error);
+                showFormMessage('Erreur de connexion au serveur. Veuillez vérifier votre connexion internet ou nous contacter directement par téléphone.', 'error');
+                
+                // Option de secours : envoyer par email directement
+                const emailBody = `
+Nom: ${formObject.firstName} ${formObject.lastName}
+Email: ${formObject.email}
+Téléphone: ${formObject.phone || 'Non fourni'}
+Sujet: ${formObject.subject}
+Message: ${formObject.message}
+Newsletter: ${formObject.newsletter ? 'Oui' : 'Non'}
+                `.trim();
+                
+                const mailtoLink = `mailto:thiernoloumsa@gmail.com?subject=Message depuis le site LoumShoes: ${encodeURIComponent(formObject.subject)}&body=${encodeURIComponent(emailBody)}`;
+                
+                setTimeout(() => {
+                    if (confirm("Impossible de contacter le serveur. Voulez-vous envoyer votre message par email ?")) {
+                        window.location.href = mailtoLink;
+                    }
+                }, 2000);
+            } finally {
+                // Réinitialiser le bouton
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                loadingSpinner.classList.remove('active');
+            }
+        }
+
+        // Afficher un message dans le formulaire
+        function showFormMessage(message, type) {
+            const formMessage = document.getElementById('formMessage');
+            formMessage.textContent = message;
+            formMessage.className = 'mt-4 text-center p-4 rounded-lg';
+            
+            if (type === 'success') {
+                formMessage.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-300');
+            } else if (type === 'error') {
+                formMessage.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-300');
+            }
+            
+            formMessage.classList.remove('hidden');
+            
+            // Faire défiler vers le message
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Gestion du panier
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCountElement = document.getElementById('cartCount');
+            if (cartCountElement) {
+                cartCountElement.textContent = totalItems;
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p id="emptyCartMessage" class="text-gray-500 text-center py-8">Votre panier est vide</p>';
+                document.getElementById('cartSubtotal').textContent = '0 FCFA';
+                document.getElementById('cartTotal').textContent = '0 FCFA';
+                return;
+            }
+            
+            // Supprimer le message "panier vide"
+            emptyCartMessage?.remove();
+            
+            // Afficher les articles du panier
+            let cartHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                cartHTML += `
+                    <div class="cart-item flex items-center border-b py-4">
+                        <div class="w-16 h-16 mr-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">${item.name}</h4>
+                            <div class="text-sm text-gray-500">${formatFCFA(item.price)} / unité</div>
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="flex items-center">
+                                    <button class="decrease-qty text-gray-500 hover:text-blue-600 mr-2" data-id="${item.id}">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span class="quantity-display font-medium">${item.quantity}</span>
+                                    <button class="increase-qty text-gray-500 hover:text-blue-600 ml-2" data-id="${item.id}">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="font-bold mr-4">${formatFCFA(itemTotal)}</span>
+                                    <button class="remove-item text-red-500 hover:text-red-700" data-id="${item.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = cartHTML;
+            
+            // Mettre à jour les totaux
+            document.getElementById('cartSubtotal').textContent = formatFCFA(subtotal);
+            
+            // Calculer les frais de livraison (gratuits à partir de 32.800 FCFA)
+            const shipping = subtotal >= 32800 ? 0 : 3000;
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Gratuite' : formatFCFA(shipping);
+            
+            const total = subtotal + shipping;
+            document.getElementById('cartTotal').textContent = formatFCFA(total);
+            
+            // Ajouter des écouteurs d'événements pour les boutons du panier
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    removeFromCart(productId);
+                });
+            });
+            
+            document.querySelectorAll('.increase-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === productId);
+                    if (item) {
+                        item.quantity += 1;
+                        saveCart();
+                        updateCartCount();
+                        updateCartDisplay();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.decrease-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === productId);
+                    if (item) {
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                        } else {
+                            removeFromCart(productId);
+                        }
+                        saveCart();
+                        updateCartCount();
+                        updateCartDisplay();
+                    }
+                });
+            });
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.remove('translate-x-full');
+            document.getElementById('cartOverlay').classList.remove('hidden');
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.add('translate-x-full');
+            document.getElementById('cartOverlay').classList.add('hidden');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Votre panier est vide. Ajoutez des produits avant de passer commande.', 'error');
+                return;
+            }
+            
+            const total = document.getElementById('cartTotal').textContent;
+            showNotification(`Commande passée avec succès! Total: ${total}.`);
+            
+            // Vider le panier
+            cart = [];
+            saveCart();
+            updateCartCount();
+            updateCartDisplay();
+            closeCart();
+        }
+
+        function showNotification(message, type = 'success') {
+            // Créer une notification temporaire
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'} text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Supprimer la notification après 5 secondes
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Fonction pour formatter les nombres avec séparateurs de milliers (FCFA)
+        function formatFCFA(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " FCFA";
+        }
+    </script>
+</body>
+</html>
