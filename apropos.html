@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qui sommes-nous - Loum Business Corporations</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles personnalisés identiques à la page principale */
+        .category-tab.active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .filter-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .marque-filter.active {
+            background-color: #10b981;
+            color: white;
+        }
+        .sport-filter.active {
+            background-color: #8b5cf6;
+            color: white;
+        }
+        .promo-badge {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .fcfaprice {
+            font-weight: bold;
+            color: #065f46;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+        }
+        .value-card:hover {
+            transform: translateY(-10px);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- En-tête / Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-12 w-auto">
+                    <h1 class="text-2xl font-bold text-gray-800">LOUM BUSINESS<span class="text-blue-600">CORPORATIONS</span></h1>
+                </div>
+                
+                <!-- Navigation desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-blue-600 font-medium">Catalogue</a>
+                    <a href="apropos.html" class="text-blue-600 font-medium">Qui sommes-nous</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-red-600 font-medium">Contact</a>
+                </nav>
+                
+                <!-- Icônes panier et menu mobile -->
+                <div class="flex items-center space-x-6">
+                    <!-- Panier avec compteur -->
+                    <div class="relative">
+                        <a href="index.html#cartSidebar" class="text-gray-700 hover:text-blue-600">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Menu mobile -->
+                    <button id="mobileMenuToggle" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Menu mobile -->
+            <div id="mobileMenu" class="hidden md:hidden py-4 border-t">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
+                    <a href="catalogue.html" class="text-gray-700 hover:text-blue-600 font-medium">Catalogue</a>
+                    <a href="apropos.html" class="text-blue-600 font-medium">Qui sommes-nous</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-red-600 font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière À propos -->
+    <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Qui sommes-nous ?</h1>
+            <p class="text-xl max-w-3xl mx-auto">Découvrez Loum Business Corporations, votre partenaire de confiance pour l'équipement sportif en Afrique de l'Ouest.</p>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <span class="bg-white/20 px-4 py-2 rounded-full">Depuis 2023</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full">+5000 clients</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full">100% satisfaction</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full">Prix en FCFA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notre histoire -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Notre Histoire</h2>
+                    <div class="space-y-4 text-gray-600">
+                        <p>Fondée en 2023 par Thierno Loum, <strong>Loum Business Corporations</strong> est née d'une passion pour le sport et d'une vision entrepreneuriale : rendre l'équipement sportif de qualité accessible à tous en Afrique de l'Ouest, avec des <span class="font-bold text-blue-600">prix affichés en FCFA</span>.</p>
+                        <p>Ce qui a commencé comme une petite entreprise familiale est rapidement devenu une référence dans la vente de chaussures de basket et de maillots de football au Sénégal et dans toute la région.</p>
+                        <p>Notre engagement envers la qualité, les prix justes et le service client exceptionnel nous a permis de bâtir une communauté fidèle de sportifs passionnés.</p>
+                    </div>
+                    <div class="mt-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                        <p class="text-gray-700 italic">"Notre mission est de fournir à chaque athlète l'équipement dont il a besoin pour performer, à des prix qui respectent son budget, tout en garantissant qualité et authenticité."</p>
+                        <p class="mt-4 font-semibold text-gray-800">- Thierno Loum, Fondateur</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <img src="images/photo.avif" alt="Notre équipe" class="w-full rounded-lg shadow-2xl">
+                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-lg shadow-lg w-3/4">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Nos réalisations</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-blue-500">5000+</div>
+                                    <div class="text-sm text-gray-600">Clients</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-green-500">12</div>
+                                    <div class="text-sm text-gray-600">Marques</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-purple-500">98%</div>
+                                    <div class="text-sm text-gray-600">Satisfaction</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nos valeurs -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Nos Valeurs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="value-card bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-award text-blue-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Qualité Garantie</h3>
+                    <p class="text-gray-600">Nous sélectionnons rigoureusement chaque produit pour garantir authenticité et durabilité. Tous nos articles sont vérifiés avant expédition.</p>
+                </div>
+                
+                <div class="value-card bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-hand-holding-usd text-green-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Prix en FCFA</h3>
+                    <p class="text-gray-600">Tous nos prix sont affichés en FCFA, sans frais cachés. Nous négocions directement avec les fournisseurs pour vous offrir les meilleurs tarifs.</p>
+                </div>
+                
+                <div class="value-card bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-headset text-purple-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Service Client</h3>
+                    <p class="text-gray-600">Notre équipe est disponible pour vous accompagner à chaque étape, du choix du produit à la livraison, et même après l'achat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notre équipe -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Notre Équipe</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user text-white text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Thierno Loum</h3>
+                    <p class="text-blue-500 font-medium">Fondateur & CEO</p>
+                    <p class="text-gray-600 mt-2">Passionné de sport et entrepreneur visionnaire</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user-tie text-white text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Amina Diallo</h3>
+                    <p class="text-green-500 font-medium">Responsable Achats</p>
+                    <p class="text-gray-600 mt-2">Expert en sélection de produits sportifs</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user-headset text-white text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Moussa Diop</h3>
+                    <p class="text-purple-500 font-medium">Service Client</p>
+                    <p class="text-gray-600 mt-2">Toujours prêt à vous aider avec le sourire</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-shipping-fast text-white text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Fatou Ndiaye</h3>
+                    <p class="text-blue-500 font-medium">Logistique</p>
+                    <p class="text-gray-600 mt-2">Assure une livraison rapide et sécurisée</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pourquoi nous choisir -->
+    <section class="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Pourquoi choisir Loum Business Corporations ?</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Produits Authentiques</h3>
+                            <p class="text-gray-600">Tous nos produits sont garantis authenticité. Retours acceptés sous 30 jours si non satisfait.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-truck text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Livraison Rapide</h3>
+                            <p class="text-gray-600">Expédition sous 24-48h et livraison gratuite à partir de 32.800 FCFA d'achat.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-lock text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Paiement Sécurisé</h3>
+                            <p class="text-gray-600">Transactions 100% sécurisées avec les principales méthodes de paiement locales.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone-alt text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Support 7j/7</h3>
+                            <p class="text-gray-600">Assistance téléphonique et WhatsApp pour répondre à toutes vos questions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Notre Engagement</h3>
+                    <div class="relative border-l-2 border-blue-500 pl-8 space-y-8">
+                        <div class="relative timeline-item">
+                            <h4 class="text-lg font-bold text-gray-800">Satisfaction Client</h4>
+                            <p class="text-gray-600 mt-2">Nous mettons tout en œuvre pour que chaque client soit pleinement satisfait de son achat.</p>
+                        </div>
+                        <div class="relative timeline-item">
+                            <h4 class="text-lg font-bold text-gray-800">Support Local</h4>
+                            <p class="text-gray-600 mt-2">Nous soutenons les clubs sportifs locaux et participons au développement du sport en Afrique.</p>
+                        </div>
+                        <div class="relative timeline-item">
+                            <h4 class="text-lg font-bold text-gray-800">Innovation Continue</h4>
+                            <p class="text-gray-600 mt-2">Nous améliorons constamment notre offre pour répondre aux besoins de nos clients.</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t">
+                        <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition">Nous contacter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Marques (identique à la page principale) -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Nos Marques Partenaires</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-basketball text-4xl text-orange-500 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Nike</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-futbol text-4xl text-black mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Adidas</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-running text-4xl text-red-500 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Puma</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-basketball-ball text-4xl text-red-600 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Jordan</h3>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-tshirt text-4xl text-gray-800 mb-2"></i>
+                        <h3 class="font-bold text-gray-800">Under Armour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appel à l'action -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Prêt à découvrir nos produits ?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Rejoignez des milliers de clients satisfaits qui ont choisi Loum Business Corporations pour leur équipement sportif.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="catalogue.html" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition">Voir le catalogue</a>
+                <a href="contact.html" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition">Nous contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-10 w-auto">
+                        <h2 class="text-2xl font-bold">LOUM BUSINESS<span class="text-blue-400">CORPORATIONS</span></h2>
+                    </div>
+                    <p class="text-gray-300 mb-4">Votre destination pour l'équipement sportif de qualité. Chaussures de basket et maillots de football pour tous les niveaux. <span class="font-semibold">Prix en FCFA.</span></p>
+                    <div class="flex space-x-4">
+                        <a href="#Loum shoes" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#@loum450" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white">Accueil</a></li>
+                        <li><a href="catalogue.html" class="text-gray-300 hover:text-white">Catalogue</a></li>
+                        <li><a href="apropos.html" class="text-gray-300 hover:text-white">Qui sommes-nous</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Service client</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Livraison & Retours</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Guide des tailles</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Contactez-nous</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt text-blue-400"></i>
+                            <span class="text-gray-300">Dakar, Sénégal</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-blue-400"></i>
+                            <span class="text-gray-300">+221 76 550 76 37</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                            <span class="text-gray-300">thiernoloumsa@gmail.com</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-clock text-blue-400"></i>
+                            <span class="text-gray-300">Lun-Sam: 8h-20h</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2023 Loum Business Corporations. Tous droits réservés. <span class="font-semibold">Prix affichés en FCFA (Franc CFA).</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile toggle
+        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Récupérer le nombre d'articles dans le panier depuis le localStorage
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('loumshoes_cart') || '[]');
+            const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+
+        // Initialiser le compteur du panier
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            
+            // Animation des cartes valeurs
+            document.querySelectorAll('.value-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '';
+                });
+            });
+        });
+
+        // Notification simple
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse max-w-md`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
