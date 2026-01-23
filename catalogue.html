@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogue - SportPro | Chaussures & Maillots</title>
+    <title>Catalogue - Loum Business Corporations</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome pour les icônes -->
@@ -65,6 +65,10 @@
             padding: 1rem 0;
             border-bottom: 1px solid #e5e7eb;
         }
+        .price-fcfa {
+            font-weight: bold;
+            color: #065f46;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -72,19 +76,18 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-               <!-- Logo -->
-               <div class="flex items-center space-x-2">
-    <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-12 w-auto">
-    <h1 class="text-2xl font-bold text-gray-800">LOUM BUSINESS<span class="text-blue-600">CORPORATIONS</span></h1>
-</div>
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-12 w-auto">
+                    <h1 class="text-2xl font-bold text-gray-800">LOUM BUSINESS<span class="text-blue-600">CORPORATIONS</span></h1>
+                </div>
                 
                 <!-- Navigation desktop -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
                     <a href="catalogue.html" class="text-blue-600 font-medium border-b-2 border-blue-600">Catalogue</a>
-                    <a href="index.html#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
-                    <a href="index.html#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
-                    <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+                    <a href="apropos.html" class="text-gray-700 hover:text-blue-600 font-medium">Qui sommes-nous</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-red-600 font-medium">Contact</a>
                 </nav>
                 
                 <!-- Icônes panier et menu mobile -->
@@ -109,9 +112,8 @@
                 <div class="flex flex-col space-y-4">
                     <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Accueil</a>
                     <a href="catalogue.html" class="text-blue-600 font-medium">Catalogue</a>
-                    <a href="index.html#marques" class="text-gray-700 hover:text-blue-600 font-medium">Marques</a>
-                    <a href="index.html#promotions" class="text-gray-700 hover:text-red-600 font-medium">Promotions</a>
-                    <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+                    <a href="apropos.html" class="text-gray-700 hover:text-blue-600 font-medium">Qui sommes-nous</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-red-600 font-medium">Contact</a>
                 </div>
             </div>
         </div>
@@ -124,10 +126,11 @@
                 <div>
                     <h1 class="text-4xl md:text-5xl font-bold mb-4">Notre Catalogue</h1>
                     <p class="text-lg md:text-xl">Découvrez notre vaste collection de chaussures et maillots de sport</p>
+                    <p class="text-lg md:text-xl mt-2 font-bold">Tous nos prix sont en FCFA</p>
                 </div>
                 <div class="mt-6 md:mt-0">
                     <div class="text-center bg-white/20 p-4 rounded-lg">
-                        <p class="text-2xl font-bold" id="totalProducts">60</p>
+                        <p class="text-2xl font-bold" id="totalProducts">40</p>
                         <p class="text-sm">Produits disponibles</p>
                     </div>
                 </div>
@@ -171,12 +174,12 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Prix:</h3>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Prix (FCFA):</h3>
                     <div class="flex flex-wrap gap-2">
                         <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50 active" data-price="all">Tous</button>
-                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="0-50">0-50€</button>
-                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="50-100">50-100€</button>
-                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="100+">100€+</button>
+                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="5000-10000">5 000-10 000</button>
+                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="10000-15000">10 000-15 000</button>
+                        <button class="price-filter px-4 py-2 bg-white rounded-lg border hover:bg-yellow-50" data-price="15000-25000">15 000-25 000</button>
                     </div>
                 </div>
             </div>
@@ -196,8 +199,8 @@
                 <p class="mt-4 text-gray-600">Chargement des produits...</p>
             </div>
             
-            <!-- Bouton "Voir plus" -->
-            <div id="loadMoreContainer" class="text-center mt-12">
+            <!-- Bouton "Voir plus" (caché car seulement 40 produits) -->
+            <div id="loadMoreContainer" class="text-center mt-12 hidden">
                 <button id="loadMoreBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition">
                     Charger plus de produits
                 </button>
@@ -222,7 +225,7 @@
             <div class="border-t pt-4">
                 <div class="flex justify-between mb-2">
                     <span class="font-medium">Sous-total:</span>
-                    <span id="cartSubtotal" class="font-bold">0 €</span>
+                    <span id="cartSubtotal" class="font-bold">0 FCFA</span>
                 </div>
                 <div class="flex justify-between mb-4">
                     <span class="font-medium">Livraison:</span>
@@ -230,7 +233,7 @@
                 </div>
                 <div class="flex justify-between text-xl font-bold mb-8">
                     <span>Total:</span>
-                    <span id="cartTotal">0 €</span>
+                    <span id="cartTotal">0 FCFA</span>
                 </div>
                 
                 <button id="checkoutBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-lg hover:bg-blue-700 transition mb-4">Passer la commande</button>
@@ -248,8 +251,8 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                    
-                        <h2 class="text-2xl font-bold">Loum<span class="text-blue-400">Shoes</span></h2>
+                        <img src="image.jpg" alt="LOUM BUSINESS CORPORATIONS" class="h-10 w-auto">
+                        <h2 class="text-2xl font-bold">LOUM BUSINESS<span class="text-blue-400">CORPORATIONS</span></h2>
                     </div>
                     <p class="text-gray-300 mb-4">Votre destination pour l'équipement sportif de qualité.</p>
                     <div class="flex space-x-4">
@@ -292,23 +295,29 @@
             </div>
             
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-                <p>&copy; 2023 SportPro. Tous droits réservés.</p>
+                <p>&copy; Loum Business Corporations. Tous droits réservés.</p>
+                <p class="mt-2 font-semibold">Prix affichés en FCFA (Franc CFA)</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Données des produits (60 produits: 20 chaussures basket, 20 chaussures foot, 20 maillots)
+        // Fonction pour formatter les nombres avec séparateurs de milliers
+        function formatFCFA(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " FCFA";
+        }
+
+        // Données des produits (40 produits: 20 chaussures basket, 10 chaussures foot, 10 maillots)
         const allProducts = [
-            // Chaussures de basket (20 produits)
+            // Chaussures de basket (20 produits) - Prix entre 15 000 et 25 000 FCFA
             {
                 id: 1,
                 name: "Nike Air Jordan XXXVII",
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "nike",
-                price: 179.99,
-                originalPrice: 199.99,
+                price: 22500,
+                originalPrice: 25000,
                 image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Performance ultime avec amorti Zoom Air.",
                 promo: true,
@@ -323,8 +332,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "adidas",
-                price: 149.99,
-                originalPrice: 149.99,
+                price: 19500,
+                originalPrice: 19500,
                 image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Conçues pour James Harden, agilité maximale.",
                 promo: false,
@@ -338,8 +347,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "puma",
-                price: 129.99,
-                originalPrice: 139.99,
+                price: 16500,
+                originalPrice: 18000,
                 image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Léger et réactif pour le jeu rapide.",
                 promo: true,
@@ -353,8 +362,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "nike",
-                price: 199.99,
-                originalPrice: 199.99,
+                price: 24500,
+                originalPrice: 24500,
                 image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Puissance et contrôle pour le jeu intérieur.",
                 promo: false,
@@ -369,8 +378,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "under armour",
-                price: 159.99,
-                originalPrice: 179.99,
+                price: 20500,
+                originalPrice: 23000,
                 image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Stabilité exceptionnelle pour les shooteurs.",
                 promo: true,
@@ -384,8 +393,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "nike",
-                price: 149.99,
-                originalPrice: 149.99,
+                price: 19500,
+                originalPrice: 19500,
                 image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Polyvalentes pour tous les terrains.",
                 promo: false,
@@ -399,8 +408,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "adidas",
-                price: 139.99,
-                originalPrice: 149.99,
+                price: 18500,
+                originalPrice: 19500,
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Confort et réactivité pour Damian Lillard.",
                 promo: true,
@@ -414,8 +423,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "nike",
-                price: 129.99,
-                originalPrice: 129.99,
+                price: 17500,
+                originalPrice: 17500,
                 image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Manœuvrabilité exceptionnelle.",
                 promo: false,
@@ -429,8 +438,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "jordan",
-                price: 139.99,
-                originalPrice: 149.99,
+                price: 18500,
+                originalPrice: 19500,
                 image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Puissance et explosivité pour Zion Williamson.",
                 promo: true,
@@ -444,8 +453,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "puma",
-                price: 129.99,
-                originalPrice: 129.99,
+                price: 17500,
+                originalPrice: 17500,
                 image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Édition LaMelo Ball, style unique.",
                 promo: false,
@@ -459,8 +468,8 @@
                 category: "chaussures-basket",
                 type: "femme",
                 marque: "nike",
-                price: 89.99,
-                originalPrice: 99.99,
+                price: 12500,
+                originalPrice: 13500,
                 image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Accessibles et performantes.",
                 promo: true,
@@ -474,8 +483,8 @@
                 category: "chaussures-basket",
                 type: "enfant",
                 marque: "adidas",
-                price: 69.99,
-                originalPrice: 79.99,
+                price: 9500,
+                originalPrice: 10500,
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Parfaites pour les jeunes joueurs.",
                 promo: true,
@@ -489,8 +498,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "nike",
-                price: 99.99,
-                originalPrice: 119.99,
+                price: 13500,
+                originalPrice: 15500,
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Amorti Max Air pour un confort optimal.",
                 promo: true,
@@ -504,8 +513,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "adidas",
-                price: 119.99,
-                originalPrice: 129.99,
+                price: 15500,
+                originalPrice: 16500,
                 image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Pour le jeu rapide et créatif.",
                 promo: true,
@@ -519,8 +528,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "jordan",
-                price: 134.99,
-                originalPrice: 149.99,
+                price: 17000,
+                originalPrice: 18500,
                 image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Signature de Luka Doncic.",
                 promo: true,
@@ -534,8 +543,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "nike",
-                price: 169.99,
-                originalPrice: 179.99,
+                price: 21500,
+                originalPrice: 22500,
                 image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Réactivité et explosivité.",
                 promo: true,
@@ -549,8 +558,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "adidas",
-                price: 109.99,
-                originalPrice: 119.99,
+                price: 14500,
+                originalPrice: 15500,
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Pour Donovan Mitchell.",
                 promo: true,
@@ -564,8 +573,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "puma",
-                price: 119.99,
-                originalPrice: 129.99,
+                price: 15500,
+                originalPrice: 16500,
                 image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Confort et stabilité.",
                 promo: true,
@@ -579,8 +588,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "nike",
-                price: 149.99,
-                originalPrice: 159.99,
+                price: 19500,
+                originalPrice: 20500,
                 image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Durabilité et performance.",
                 promo: true,
@@ -594,8 +603,8 @@
                 category: "chaussures-basket",
                 type: "homme",
                 marque: "jordan",
-                price: 124.99,
-                originalPrice: 134.99,
+                price: 16000,
+                originalPrice: 17000,
                 image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Performance accessible.",
                 promo: true,
@@ -604,15 +613,15 @@
                 madeInChina: false
             },
             
-            // Chaussures de football (20 produits)
+            // Chaussures de football (10 produits) - Prix entre 12 000 et 25 000 FCFA
             {
                 id: 21,
-                name: "Nike Mercurial Superfly 9 Elite",
+                name: "Nike Mercurial Superfly 9",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "nike",
-                price: 279.99,
-                originalPrice: 299.99,
+                price: 24500,
+                originalPrice: 26500,
                 image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Vitesse et précision ultimes.",
                 promo: true,
@@ -623,12 +632,12 @@
             },
             {
                 id: 22,
-                name: "Adidas Predator Edge+",
+                name: "Adidas Predator Edge",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "adidas",
-                price: 269.99,
-                originalPrice: 279.99,
+                price: 23500,
+                originalPrice: 24500,
                 image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Contrôle et précision améliorés.",
                 promo: true,
@@ -642,8 +651,8 @@
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "puma",
-                price: 229.99,
-                originalPrice: 249.99,
+                price: 20500,
+                originalPrice: 22500,
                 image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Agilité et adaptabilité.",
                 promo: true,
@@ -653,12 +662,12 @@
             },
             {
                 id: 24,
-                name: "Nike Phantom GT2 Elite",
+                name: "Nike Phantom GT2",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "nike",
-                price: 259.99,
-                originalPrice: 279.99,
+                price: 22500,
+                originalPrice: 24500,
                 image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Précision et contrôle.",
                 promo: true,
@@ -668,12 +677,12 @@
             },
             {
                 id: 25,
-                name: "Adidas X Speedportal+",
+                name: "Adidas X Speedportal",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "adidas",
-                price: 249.99,
-                originalPrice: 269.99,
+                price: 21500,
+                originalPrice: 23500,
                 image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Vitesse et légèreté.",
                 promo: true,
@@ -683,12 +692,12 @@
             },
             {
                 id: 26,
-                name: "Nike Tiempo Legend 9 Elite",
+                name: "Nike Tiempo Legend 9",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "nike",
-                price: 239.99,
-                originalPrice: 259.99,
+                price: 19500,
+                originalPrice: 21500,
                 image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Confort et toucher de ballon.",
                 promo: true,
@@ -698,12 +707,12 @@
             },
             {
                 id: 27,
-                name: "Adidas Copa Sense+",
+                name: "Adidas Copa Sense",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "adidas",
-                price: 229.99,
-                originalPrice: 249.99,
+                price: 18500,
+                originalPrice: 20500,
                 image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Sensibilité et contrôle.",
                 promo: true,
@@ -717,8 +726,8 @@
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "puma",
-                price: 219.99,
-                originalPrice: 239.99,
+                price: 17500,
+                originalPrice: 19500,
                 image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Légèreté et vitesse.",
                 promo: true,
@@ -728,12 +737,12 @@
             },
             {
                 id: 29,
-                name: "Nike Mercurial Vapor 15 Elite",
+                name: "Nike Mercurial Vapor 15",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "nike",
-                price: 269.99,
-                originalPrice: 289.99,
+                price: 23500,
+                originalPrice: 25500,
                 image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Vitesse explosive.",
                 promo: true,
@@ -743,12 +752,12 @@
             },
             {
                 id: 30,
-                name: "Adidas Predator Accuracy+",
+                name: "Adidas Predator Accuracy",
                 category: "chaussures-foot",
                 type: "homme",
                 marque: "adidas",
-                price: 259.99,
-                originalPrice: 279.99,
+                price: 22500,
+                originalPrice: 24500,
                 image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Précision maximale.",
                 promo: true,
@@ -756,488 +765,168 @@
                 stock: 9,
                 madeInChina: false
             },
+            
+            // Maillots de football (10 produits) - Prix entre 5 000 et 15 000 FCFA
             {
                 id: 31,
-                name: "Nike Phantom GT2 Academy",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "nike",
-                price: 119.99,
-                originalPrice: 139.99,
-                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Version Academy du Phantom GT2.",
-                promo: true,
-                colors: ["Noir", "Bleu", "Blanc"],
-                stock: 20,
-                madeInChina: true,
-                usPrice: "$25"
-            },
-            {
-                id: 32,
-                name: "Adidas X Speedflow.3",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "adidas",
-                price: 89.99,
-                originalPrice: 109.99,
-                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Entrée de gamme de la série X.",
-                promo: true,
-                colors: ["Vert", "Noir", "Blanc"],
-                stock: 25,
-                madeInChina: true,
-                usPrice: "$18"
-            },
-            {
-                id: 33,
-                name: "Puma Future Play",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "puma",
-                price: 79.99,
-                originalPrice: 99.99,
-                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Future version play.",
-                promo: true,
-                colors: ["Noir", "Rouge", "Blanc"],
-                stock: 22,
-                madeInChina: true,
-                usPrice: "$16"
-            },
-            {
-                id: 34,
-                name: "Nike Tiempo Legend 9 Academy",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "nike",
-                price: 109.99,
-                originalPrice: 129.99,
-                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Version Academy du Tiempo.",
-                promo: true,
-                colors: ["Blanc", "Noir", "Bleu"],
-                stock: 18,
-                madeInChina: true,
-                usPrice: "$22"
-            },
-            {
-                id: 35,
-                name: "Adidas Predator Edge.3",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "adidas",
-                price: 99.99,
-                originalPrice: 119.99,
-                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Version .3 du Predator Edge.",
-                promo: true,
-                colors: ["Rouge", "Noir", "Blanc"],
-                stock: 21,
-                madeInChina: true,
-                usPrice: "$20"
-            },
-            {
-                id: 36,
-                name: "Puma Ultra Match",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "puma",
-                price: 69.99,
-                originalPrice: 89.99,
-                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Ultra version match.",
-                promo: true,
-                colors: ["Orange", "Noir", "Blanc"],
-                stock: 24,
-                madeInChina: true,
-                usPrice: "$14"
-            },
-            {
-                id: 37,
-                name: "Nike Mercurial Superfly 9 Academy",
-                category: "chaussures-foot",
-                type: "femme",
-                marque: "nike",
-                price: 119.99,
-                originalPrice: 139.99,
-                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Mercurial pour femmes.",
-                promo: true,
-                colors: ["Rose", "Blanc", "Noir"],
-                stock: 15,
-                madeInChina: true,
-                usPrice: "$25"
-            },
-            {
-                id: 38,
-                name: "Adidas Predator Edge.3 FG",
-                category: "chaussures-foot",
-                type: "enfant",
-                marque: "adidas",
-                price: 59.99,
-                originalPrice: 79.99,
-                image: "https://images.unsplash.com/photo-1608248543828-01caf0e5c8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Predator pour enfants.",
-                promo: true,
-                colors: ["Bleu", "Rouge", "Blanc"],
-                stock: 30,
-                madeInChina: true,
-                usPrice: "$12"
-            },
-            {
-                id: 39,
-                name: "Nike Phantom GT2 Club",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "nike",
-                price: 79.99,
-                originalPrice: 99.99,
-                image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Version Club du Phantom GT2.",
-                promo: true,
-                colors: ["Noir", "Vert", "Blanc"],
-                stock: 28,
-                madeInChina: true,
-                usPrice: "$16"
-            },
-            {
-                id: 40,
-                name: "Adidas Copa Sense.3",
-                category: "chaussures-foot",
-                type: "homme",
-                marque: "adidas",
-                price: 89.99,
-                originalPrice: 109.99,
-                image: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Version .3 du Copa Sense.",
-                promo: true,
-                colors: ["Blanc", "Noir", "Or"],
-                stock: 23,
-                madeInChina: true,
-                usPrice: "$18"
-            },
-            
-            // Maillots de football (20 produits)
-            {
-                id: 41,
-                name: "2025-26 Relié Maillot Player Version Jersey",
+                name: "Maillot Nike Player Version 2025",
                 category: "maillots",
                 type: "homme",
                 marque: "nike",
-                price: 27.36,
-                originalPrice: 34.20,
+                price: 12500,
+                originalPrice: 15500,
                 image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot version joueur 2025-26, qualité premium.",
+                description: "Maillot version joueur 2025, qualité premium.",
                 promo: true,
                 colors: ["Bleu", "Blanc"],
                 stock: 50,
                 madeInChina: true,
-                usPrice: "$5",
+                usPrice: "$20",
                 popular: true
             },
             {
-                id: 42,
-                name: "Brazil Jersey 2024-2025-2026 Soccer",
+                id: 32,
+                name: "Maillot Brésil 2024-2026",
                 category: "maillots",
                 type: "homme",
                 marque: "adidas",
-                price: 27.36,
-                originalPrice: 34.20,
+                price: 11500,
+                originalPrice: 14500,
                 image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Maillot Brésil officiel pour les 3 prochaines saisons.",
                 promo: true,
                 colors: ["Jaune", "Vert", "Bleu"],
                 stock: 45,
                 madeInChina: true,
-                usPrice: "$5"
+                usPrice: "$18"
             },
             {
-                id: 43,
-                name: "European Cup Football Shirt 2024-2025",
+                id: 33,
+                name: "Maillot Coupe d'Europe 2024",
                 category: "maillots",
                 type: "homme",
                 marque: "nike",
-                price: 44.80,
-                originalPrice: 56.00,
+                price: 13500,
+                originalPrice: 16500,
                 image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Maillot Édition Spéciale Coupe d'Europe.",
                 promo: true,
                 colors: ["Blanc", "Or"],
                 stock: 30,
                 madeInChina: true,
-                usPrice: "$8"
+                usPrice: "$25"
             },
             {
-                id: 44,
-                name: "Maillot De Foot Set Thai Brazil Soccer",
-                category: "maillots",
-                type: "homme",
-                marque: "puma",
-                price: 75.09,
-                originalPrice: 93.86,
-                image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Pack spécial Brésil avec short et chaussettes.",
-                promo: false,
-                colors: ["Jaune", "Vert"],
-                stock: 15,
-                madeInChina: true,
-                usPrice: "$14"
-            },
-            {
-                id: 45,
-                name: "2006 Season France Away Retro Player Version",
+                id: 34,
+                name: "Maillot France Retro 2006",
                 category: "maillots",
                 type: "homme",
                 marque: "adidas",
-                price: 44.80,
-                originalPrice: 56.00,
+                price: 10500,
+                originalPrice: 13500,
                 image: "https://images.unsplash.com/photo-1594736797933-d6301c6c8f54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Édition rétro France 2006, version joueur.",
                 promo: true,
                 colors: ["Blanc", "Bleu"],
                 stock: 25,
                 madeInChina: true,
-                usPrice: "$8"
+                usPrice: "$16"
             },
             {
-                id: 46,
-                name: "Dropshipping Soccer Jersey High Quality",
+                id: 35,
+                name: "Maillot Angleterre 2024",
                 category: "maillots",
                 type: "homme",
                 marque: "nike",
-                price: 34.31,
-                originalPrice: 42.89,
-                image: "https://images.unsplash.com/photo-1626248801379-51a0748a5f96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Haute qualité, parfait pour le dropshipping.",
+                price: 14500,
+                originalPrice: 17500,
+                image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot extérieur Angleterre 2024.",
                 promo: true,
-                colors: ["Rouge", "Noir"],
-                stock: 100,
-                madeInChina: true,
-                usPrice: "$10"
-            },
-            {
-                id: 47,
-                name: "2025 High Quality Men's Soccer Jersey Training",
-                category: "maillots",
-                type: "homme",
-                marque: "adidas",
-                price: 34.31,
-                originalPrice: 42.89,
-                image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot d'entraînement haute qualité 2025.",
-                promo: true,
-                colors: ["Noir", "Gris"],
-                stock: 60,
-                madeInChina: true,
-                usPrice: "$10"
-            },
-            {
-                id: 48,
-                name: "Dropshipping 1992 Germany Retro Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "adidas",
-                price: 159.75,
-                originalPrice: 199.69,
-                image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Édition rétro Allemagne 1992, collectionneur.",
-                promo: false,
-                colors: ["Blanc", "Noir"],
-                stock: 12,
+                colors: ["Bleu", "Rouge"],
+                stock: 21,
                 madeInChina: true,
                 usPrice: "$28"
             },
             {
-                id: 49,
-                name: "2025-26 Al Hilal Soccer Jersey Home Away Men",
+                id: 36,
+                name: "Maillot Pays-Bas 2024",
                 category: "maillots",
                 type: "homme",
                 marque: "nike",
-                price: 27.36,
-                originalPrice: 34.20,
-                image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot domicile et extérieur Al Hilal.",
+                price: 12500,
+                originalPrice: 15500,
+                image: "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile Pays-Bas 2024.",
                 promo: true,
-                colors: ["Bleu", "Blanc"],
-                stock: 40,
+                colors: ["Orange", "Blanc"],
+                stock: 24,
                 madeInChina: true,
-                usPrice: "$5"
+                usPrice: "$20"
             },
             {
-                id: 50,
-                name: "2024/25 Paris Home/Away Soccer Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "nike",
-                price: 44.80,
-                originalPrice: 56.00,
-                image: "https://images.unsplash.com/photo-1594736797933-d6301c6c8f54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot domicile et extérieur Paris 2024/25.",
-                promo: true,
-                colors: ["Bleu", "Rouge"],
-                stock: 35,
-                madeInChina: true,
-                usPrice: "$8"
-            },
-            {
-                id: 51,
-                name: "Argentina 2022 World Cup Champion Jersey",
+                id: 37,
+                name: "Maillot Argentine Champion 2022",
                 category: "maillots",
                 type: "homme",
                 marque: "adidas",
-                price: 52.50,
-                originalPrice: 65.63,
+                price: 15500,
+                originalPrice: 18500,
                 image: "https://images.unsplash.com/photo-1626248801379-51a0748a5f96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 description: "Maillot champion du monde 2022 Argentine.",
                 promo: true,
                 colors: ["Bleu", "Blanc"],
                 stock: 28,
                 madeInChina: true,
-                usPrice: "$9"
+                usPrice: "$30"
             },
             {
-                id: 52,
-                name: "Manchester United 2024/25 Home Jersey",
+                id: 38,
+                name: "Maillot Portugal 2024",
                 category: "maillots",
                 type: "homme",
-                marque: "adidas",
-                price: 68.90,
-                originalPrice: 86.13,
+                marque: "nike",
+                price: 11500,
+                originalPrice: 14500,
                 image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot domicile Manchester United 2024/25.",
-                promo: false,
-                colors: ["Rouge", "Noir"],
-                stock: 22,
-                madeInChina: true,
-                usPrice: "$12"
-            },
-            {
-                id: 53,
-                name: "Barcelona 2024/25 Away Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "nike",
-                price: 61.25,
-                originalPrice: 76.56,
-                image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot extérieur FC Barcelone 2024/25.",
+                description: "Maillot domicile Portugal 2024.",
                 promo: true,
-                colors: ["Jaune", "Bleu"],
-                stock: 30,
-                madeInChina: true,
-                usPrice: "$11"
-            },
-            {
-                id: 54,
-                name: "Chelsea 2024/25 Third Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "nike",
-                price: 47.60,
-                originalPrice: 59.50,
-                image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Troisième maillot Chelsea 2024/25.",
-                promo: true,
-                colors: ["Vert", "Blanc"],
-                stock: 18,
-                madeInChina: true,
-                usPrice: "$8"
-            },
-            {
-                id: 55,
-                name: "AC Milan 2024/25 Home Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "puma",
-                price: 58.80,
-                originalPrice: 73.50,
-                image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot domicile AC Milan 2024/25.",
-                promo: false,
-                colors: ["Rouge", "Noir"],
-                stock: 20,
-                madeInChina: true,
-                usPrice: "$10"
-            },
-            {
-                id: 56,
-                name: "Bayern Munich 2024/25 Away Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "adidas",
-                price: 65.45,
-                originalPrice: 81.81,
-                image: "https://images.unsplash.com/photo-1594736797933-d6301c6c8f54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot extérieur Bayern Munich 2024/25.",
-                promo: true,
-                colors: ["Noir", "Rose"],
-                stock: 25,
-                madeInChina: true,
-                usPrice: "$11"
-            },
-            {
-                id: 57,
-                name: "Liverpool 2024/25 Home Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "nike",
-                price: 63.70,
-                originalPrice: 79.63,
-                image: "https://images.unsplash.com/photo-1626248801379-51a0748a5f96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot domicile Liverpool 2024/25.",
-                promo: false,
-                colors: ["Rouge", "Blanc"],
+                colors: ["Rouge", "Vert"],
                 stock: 32,
                 madeInChina: true,
-                usPrice: "$11"
+                usPrice: "$18"
             },
             {
-                id: 58,
-                name: "Real Madrid 2024/25 Third Jersey",
+                id: 39,
+                name: "Maillot Allemagne 2024",
                 category: "maillots",
                 type: "homme",
                 marque: "adidas",
-                price: 49.00,
-                originalPrice: 61.25,
-                image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Troisième maillot Real Madrid 2024/25.",
-                promo: true,
-                colors: ["Violet", "Noir"],
-                stock: 15,
-                madeInChina: true,
-                usPrice: "$9"
-            },
-            {
-                id: 59,
-                name: "Juventus 2024/25 Home Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "adidas",
-                price: 56.35,
-                originalPrice: 70.44,
-                image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot domicile Juventus 2024/25.",
-                promo: false,
-                colors: ["Noir", "Blanc"],
-                stock: 28,
-                madeInChina: true,
-                usPrice: "$10"
-            },
-            {
-                id: 60,
-                name: "Atletico Madrid 2024/25 Home Jersey",
-                category: "maillots",
-                type: "homme",
-                marque: "nike",
-                price: 51.45,
-                originalPrice: 64.31,
+                price: 12500,
+                originalPrice: 15500,
                 image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Maillot domicile Atletico Madrid 2024/25.",
+                description: "Maillot domicile Allemagne 2024.",
                 promo: true,
-                colors: ["Rouge", "Blanc"],
-                stock: 23,
+                colors: ["Blanc", "Noir"],
+                stock: 26,
                 madeInChina: true,
-                usPrice: "$9"
+                usPrice: "$20"
+            },
+            {
+                id: 40,
+                name: "Maillot Espagne 2024",
+                category: "maillots",
+                type: "homme",
+                marque: "adidas",
+                price: 11500,
+                originalPrice: 14500,
+                image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Maillot domicile Espagne 2024.",
+                promo: true,
+                colors: ["Rouge", "Jaune"],
+                stock: 29,
+                madeInChina: true,
+                usPrice: "$18"
             }
         ];
 
@@ -1247,8 +936,6 @@
         let currentFilter = 'all';
         let currentMarque = 'all';
         let currentPrice = 'all';
-        let displayedProducts = 12;
-        const productsPerLoad = 12;
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
@@ -1274,12 +961,6 @@
             if (hash === 'chaussures-basket') category = 'chaussures-basket';
             else if (hash === 'chaussures-foot') category = 'chaussures-foot';
             else if (hash === 'maillots') category = 'maillots';
-            else if (hash === 'promotions') {
-                // Activer le filtre promotions
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelector('.filter-btn[data-filter="promo"]').classList.add('active');
-                currentFilter = 'promo';
-            }
             
             // Activer le filtre de catégorie
             document.querySelectorAll('.category-filter').forEach(btn => btn.classList.remove('active'));
@@ -1287,24 +968,19 @@
             currentCategory = category;
             
             // Réinitialiser les autres filtres
+            currentFilter = 'all';
             currentMarque = 'all';
             currentPrice = 'all';
             
             // Réinitialiser les boutons de filtre
-            if (hash !== 'promotions') {
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
-                currentFilter = 'all';
-            }
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
             
             document.querySelectorAll('.marque-filter').forEach(btn => btn.classList.remove('active'));
             document.querySelector('.marque-filter[data-marque="all"]').classList.add('active');
             
             document.querySelectorAll('.price-filter').forEach(btn => btn.classList.remove('active'));
             document.querySelector('.price-filter[data-price="all"]').classList.add('active');
-            
-            // Réinitialiser l'affichage
-            displayedProducts = 12;
             
             // Rendre les produits
             renderProducts();
@@ -1324,7 +1000,6 @@
                     
                     // Mettre à jour la catégorie actuelle
                     currentCategory = this.getAttribute('data-category');
-                    displayedProducts = 12;
                     renderProducts();
                 });
             });
@@ -1338,7 +1013,6 @@
                     
                     // Mettre à jour le filtre actuel
                     currentFilter = this.getAttribute('data-filter');
-                    displayedProducts = 12;
                     renderProducts();
                 });
             });
@@ -1352,7 +1026,6 @@
                     
                     // Mettre à jour la marque actuelle
                     currentMarque = this.getAttribute('data-marque');
-                    displayedProducts = 12;
                     renderProducts();
                 });
             });
@@ -1366,13 +1039,9 @@
                     
                     // Mettre à jour le filtre prix actuel
                     currentPrice = this.getAttribute('data-price');
-                    displayedProducts = 12;
                     renderProducts();
                 });
             });
-
-            // Bouton "Charger plus"
-            document.getElementById('loadMoreBtn').addEventListener('click', loadMoreProducts);
 
             // Panier
             document.getElementById('cartToggle').addEventListener('click', openCart);
@@ -1414,9 +1083,9 @@
                     // Filtre par prix
                     let priceMatch = false;
                     if (currentPrice === 'all') priceMatch = true;
-                    else if (currentPrice === '0-50') priceMatch = product.price <= 50;
-                    else if (currentPrice === '50-100') priceMatch = product.price > 50 && product.price <= 100;
-                    else if (currentPrice === '100+') priceMatch = product.price > 100;
+                    else if (currentPrice === '5000-10000') priceMatch = product.price >= 5000 && product.price <= 10000;
+                    else if (currentPrice === '10000-15000') priceMatch = product.price >= 10000 && product.price <= 15000;
+                    else if (currentPrice === '15000-25000') priceMatch = product.price >= 15000 && product.price <= 25000;
                     
                     return categoryMatch && filterMatch && marqueMatch && priceMatch;
                 });
@@ -1424,11 +1093,8 @@
                 // Mettre à jour le compteur de produits filtrés
                 document.getElementById('totalProducts').textContent = filteredProducts.length;
                 
-                // Limiter le nombre de produits affichés
-                const productsToShow = filteredProducts.slice(0, displayedProducts);
-                
                 // Afficher les produits filtrés
-                productsToShow.forEach(product => {
+                filteredProducts.forEach(product => {
                     const productCard = document.createElement('div');
                     productCard.className = 'product-card bg-white rounded-lg shadow-lg overflow-hidden';
                     
@@ -1447,7 +1113,7 @@
                     
                     // Prix original barré si en promotion
                     const originalPriceDisplay = product.promo ? 
-                        `<span class="text-gray-500 line-through text-sm">${product.originalPrice.toFixed(2)} €</span>` : '';
+                        `<span class="text-gray-500 line-through text-sm">${formatFCFA(product.originalPrice)}</span>` : '';
                     
                     // Icône selon la catégorie
                     let categoryIcon = '';
@@ -1466,7 +1132,7 @@
                     
                     // Badge "Made in China" pour certains produits
                     const madeInChinaBadge = product.madeInChina ? 
-                        `<div class="made-in-china-badge">${product.usPrice ? product.usPrice + ' (US $)' : ''} made-in-china.com</div>` : '';
+                        `<div class="made-in-china-badge">${product.usPrice ? product.usPrice + ' (US $)' : ''}</div>` : '';
                     
                     // Sélecteur de quantité
                     const quantitySelector = `
@@ -1513,7 +1179,7 @@
                             ${quantitySelector}
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-2xl font-bold text-blue-600">${product.price.toFixed(2)} €</p>
+                                    <p class="text-2xl font-bold text-green-600">${formatFCFA(product.price)}</p>
                                     ${originalPriceDisplay}
                                     ${madeInChinaBadge}
                                 </div>
@@ -1529,13 +1195,6 @@
                 
                 // Masquer l'indicateur de chargement
                 document.getElementById('loadingIndicator').classList.add('hidden');
-                
-                // Afficher ou masquer le bouton "Charger plus"
-                if (filteredProducts.length > displayedProducts) {
-                    document.getElementById('loadMoreContainer').classList.remove('hidden');
-                } else {
-                    document.getElementById('loadMoreContainer').classList.add('hidden');
-                }
                 
                 // Ajouter des écouteurs d'événements aux boutons "Ajouter au panier"
                 document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
@@ -1575,16 +1234,7 @@
                         }
                     });
                 });
-            }, 300); // Petit délai pour l'animation
-        }
-
-        // Charger plus de produits
-        function loadMoreProducts() {
-            displayedProducts += productsPerLoad;
-            renderProducts();
-            
-            // Faire défiler légèrement vers le bas pour voir les nouveaux produits
-            window.scrollBy({ top: 200, behavior: 'smooth' });
+            }, 300);
         }
 
         // Fonction pour obtenir un code couleur approximatif
@@ -1667,8 +1317,8 @@
             
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p id="emptyCartMessage" class="text-gray-500 text-center py-8">Votre panier est vide</p>';
-                document.getElementById('cartSubtotal').textContent = '0 €';
-                document.getElementById('cartTotal').textContent = '0 €';
+                document.getElementById('cartSubtotal').textContent = '0 FCFA';
+                document.getElementById('cartTotal').textContent = '0 FCFA';
                 return;
             }
             
@@ -1691,7 +1341,7 @@
                         </div>
                         <div class="flex-1">
                             <h4 class="font-medium">${item.name}</h4>
-                            <div class="text-sm text-gray-500">${item.price.toFixed(2)} € / unité</div>
+                            <div class="text-sm text-gray-500">${formatFCFA(item.price)} / unité</div>
                             <div class="flex justify-between items-center mt-2">
                                 <div class="flex items-center">
                                     <button class="decrease-qty text-gray-500 hover:text-blue-600 mr-2" data-id="${item.id}">
@@ -1703,7 +1353,7 @@
                                     </button>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="font-bold mr-4">${itemTotal.toFixed(2)} €</span>
+                                    <span class="font-bold mr-4">${formatFCFA(itemTotal)}</span>
                                     <button class="remove-item text-red-500 hover:text-red-700" data-id="${item.id}">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -1719,14 +1369,14 @@
             cartItems.innerHTML = cartHTML;
             
             // Mettre à jour les totaux
-            document.getElementById('cartSubtotal').textContent = `${subtotal.toFixed(2)} €`;
+            document.getElementById('cartSubtotal').textContent = formatFCFA(subtotal);
             
-            // Calculer les frais de livraison (gratuits à partir de 50€)
-            const shipping = subtotal >= 50 ? 0 : 4.99;
-            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)} €`;
+            // Calculer les frais de livraison (gratuits à partir de 32 800 FCFA)
+            const shipping = subtotal >= 32800 ? 0 : 3000;
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'Gratuite' : formatFCFA(shipping);
             
             const total = subtotal + shipping;
-            document.getElementById('cartTotal').textContent = `${total.toFixed(2)} €`;
+            document.getElementById('cartTotal').textContent = formatFCFA(total);
             
             // Ajouter des écouteurs d'événements pour les boutons du panier
             document.querySelectorAll('.remove-item').forEach(btn => {
